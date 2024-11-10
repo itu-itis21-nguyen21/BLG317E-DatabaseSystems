@@ -171,3 +171,70 @@ ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (areaCode, area, recordYear, series, arrivalType, val, source);
+
+-- create regions table
+
+CREATE TABLE regions (
+    region varchar(50),
+    regionCode smallint,
+    primary key (regionCode)
+);
+
+LOAD DATA INFILE './database/regions.csv'
+INTO TABLE regions
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"' 
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(region, regionCode);
+
+-- create sub-regions table
+
+CREATE TABLE subRegions (
+    subRegion varchar(50),
+    regionCode smallint,
+    subRegionCode smallint,
+    sqmi float,
+    sqkm float,
+    primary key (subRegionCode),
+    foreign key (regionCode) references regions (regionCode)
+    on delete set null
+    on update cascade
+);
+
+LOAD DATA INFILE './database/subRegions.csv'
+INTO TABLE subRegions
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"' 
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(subRegion, regionCode, subRegionCode, sqmi, sqkm);
+
+-- create countries table
+
+CREATE TABLE countries (
+    country varchar(50),
+    alpha_2 char(2),
+    alpha_3 char(3),
+    countryCode smallint,
+    iso_3166_2 char(13),
+    regionCode smallint,
+    subRegionCode smallint,
+    primary key (countryCode),
+    foreign key (regionCode) references regions (regionCode)
+    on delete set null
+    on update cascade,
+    foreign key (subRegionCode) references subRegions (subRegionCode)
+    on delete set null
+    on update cascade
+);
+
+LOAD DATA INFILE './database/countries.csv'
+INTO TABLE countries
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"' 
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(country, alpha_2, alpha_3, countryCode, iso_3166_2, @regionCode, @subRegionCode)
+SET regionCode = NULLIF(@regionCode, ''),
+    subRegionCode = NULLIF(@subRegionCode, '');
