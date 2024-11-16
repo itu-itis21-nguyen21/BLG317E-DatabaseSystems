@@ -1,181 +1,10 @@
-CREATE DATABASE UNstatistics;
-USE UNstatistics;
-
--- create co2emission table
-
-CREATE TABLE co2emission (
-    id int auto_increment,
-    areaCode int,
-    area varchar(100),
-    recordYear year,
-    series text, 
-    val float, 
-    source text,
-    primary key (id)
-);
-
-LOAD DATA INFILE './database/CO2EmissionEstimates.csv'
-INTO TABLE co2emission
-FIELDS TERMINATED BY ',' 
-ENCLOSED BY '"' 
-LINES TERMINATED BY '\n'
-IGNORE 1 ROWS
-(areaCode, area, recordYear, series, val, source);
-
--- create developmentAid table
-
-CREATE TABLE developmentAid (
-    id int auto_increment,
-    areaCode int,
-    area varchar(100),
-    recordYear year,
-    series text, 
-    val float, 
-    source text,
-    primary key (id)
-);
-
-LOAD DATA INFILE './database/DevelopmentAid.csv'
-INTO TABLE developmentAid
-FIELDS TERMINATED BY ',' 
-ENCLOSED BY '"' 
-LINES TERMINATED BY '\n'
-IGNORE 1 ROWS
-(areaCode, area, recordYear, series, val, source);
-
--- create exchangeRates table
-
-CREATE TABLE exchangeRates (
-    id int auto_increment,
-    areaCode int,
-    area varchar(100),
-    recordYear year,
-    series text,
-    currency varchar(100), 
-    val float, 
-    source text,
-    primary key (id)
-);
-
-LOAD DATA INFILE './database/ExchangeRates.csv'
-INTO TABLE exchangeRates
-FIELDS TERMINATED BY ',' 
-ENCLOSED BY '"' 
-LINES TERMINATED BY '\n'
-IGNORE 1 ROWS
-(areaCode, area, recordYear, series, currency, val, source);
-
--- create expenditureHealth table
-
-CREATE TABLE expenditureHealth (
-    id int auto_increment,
-    areaCode int,
-    area varchar(100),
-    recordYear year,
-    series text, 
-    val float, 
-    source text,
-    primary key (id)
-);
-
-LOAD DATA INFILE './database/ExpenditureHealth.csv'
-INTO TABLE expenditureHealth
-FIELDS TERMINATED BY ',' 
-ENCLOSED BY '"' 
-LINES TERMINATED BY '\n'
-IGNORE 1 ROWS
-(areaCode, area, recordYear, series, val, source);
-
--- create importsExports table
-
-CREATE TABLE importsExports (
-    id int auto_increment,
-    areaCode int,
-    area varchar(100),
-    recordYear year,
-    series text, 
-    tradeSystem char(1),
-    val int, 
-    source text,
-    primary key (id)
-);
-
-LOAD DATA INFILE './database/ImportsExports.csv'
-INTO TABLE importsExports
-FIELDS TERMINATED BY ',' 
-ENCLOSED BY '"' 
-LINES TERMINATED BY '\n'
-IGNORE 1 ROWS
-(areaCode, area, recordYear, series, tradeSystem, val, source);
-
--- create internetUsage table
-
-CREATE TABLE internetUsage (
-    id int auto_increment,
-    areaCode int,
-    area varchar(100),
-    recordYear year,
-    series text, 
-    val float, 
-    source text,
-    primary key (id)
-);
-
-LOAD DATA INFILE './database/InternetUsage.csv'
-INTO TABLE internetUsage
-FIELDS TERMINATED BY ',' 
-ENCLOSED BY '"' 
-LINES TERMINATED BY '\n'
-IGNORE 1 ROWS
-(areaCode, area, recordYear, series, val, source);
-
--- create threatenedSpecies table
-
-CREATE TABLE threatenedSpecies (
-    id int auto_increment,
-    areaCode int,
-    area varchar(100),
-    recordYear year,
-    series text, 
-    val int, 
-    source text,
-    primary key (id)
-);
-
-LOAD DATA INFILE './database/ThreatenedSpecies.csv'
-INTO TABLE threatenedSpecies
-FIELDS TERMINATED BY ',' 
-ENCLOSED BY '"' 
-LINES TERMINATED BY '\n'
-IGNORE 1 ROWS
-(areaCode, area, recordYear, series, val, source);
-
--- create tourism table
-
-CREATE TABLE tourism (
-    id int auto_increment,
-    areaCode int,
-    area varchar(100),
-    recordYear year,
-    series text, 
-    arrivalType varchar(5),
-    val int, 
-    source text,
-    primary key (id)
-);
-
-LOAD DATA INFILE './database/Tourism.csv'
-INTO TABLE tourism
-FIELDS TERMINATED BY ',' 
-ENCLOSED BY '"' 
-LINES TERMINATED BY '\n'
-IGNORE 1 ROWS
-(areaCode, area, recordYear, series, arrivalType, val, source);
+CREATE DATABASE un_stats23;
+USE un_stats23;
 
 -- create regions table
 
 CREATE TABLE regions (
-    region varchar(50),
+    region varchar(20) not null,
     regionCode smallint,
     primary key (regionCode)
 );
@@ -190,33 +19,33 @@ IGNORE 1 ROWS
 
 -- create sub-regions table
 
-CREATE TABLE subRegions (
-    subRegion varchar(50),
+CREATE TABLE subregions (
+    subregion varchar(50) not null,
+    subregionCode smallint,
     regionCode smallint,
-    subRegionCode smallint,
     sqmi float,
     sqkm float,
-    primary key (subRegionCode),
+    primary key (subregionCode),
     foreign key (regionCode) references regions (regionCode)
     on delete set null
     on update cascade
 );
 
-LOAD DATA INFILE './database/subRegions.csv'
-INTO TABLE subRegions
+LOAD DATA INFILE './database/subregions.csv'
+INTO TABLE subregions
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"' 
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
-(subRegion, regionCode, subRegionCode, sqmi, sqkm);
+(subRegion, subregionCode, regionCode, sqmi, sqkm);
 
 -- create countries table
 
 CREATE TABLE countries (
-    country varchar(50),
+    country varchar(50) not null,
+    countryCode smallint,
     alpha_2 char(2),
     alpha_3 char(3),
-    countryCode smallint,
     iso_3166_2 char(13),
     regionCode smallint,
     subRegionCode smallint,
@@ -224,7 +53,7 @@ CREATE TABLE countries (
     foreign key (regionCode) references regions (regionCode)
     on delete set null
     on update cascade,
-    foreign key (subRegionCode) references subRegions (subRegionCode)
+    foreign key (subregionCode) references subregions (subregionCode)
     on delete set null
     on update cascade
 );
@@ -235,6 +64,279 @@ FIELDS TERMINATED BY ','
 ENCLOSED BY '"' 
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
-(country, alpha_2, alpha_3, countryCode, iso_3166_2, @regionCode, @subRegionCode)
-SET regionCode = NULLIF(@regionCode, ''),
-    subRegionCode = NULLIF(@subRegionCode, '');
+(country, countryCode, alpha_2, alpha_3, iso_3166_2, regionCode, subregionCode);
+
+-- create series table
+
+CREATE TABLE series (
+    seriesID smallint,
+    series text not null,
+    unit text,
+    primary key (seriesID)
+);
+
+LOAD DATA INFILE './database/series.csv'
+INTO TABLE series
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"' 
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(seriesID, series, unit);
+
+-- create sources table
+
+CREATE TABLE sources (
+    sourceID smallint,
+    source text not null,
+    primary key (sourceID)
+);
+
+LOAD DATA INFILE './database/sources.csv'
+INTO TABLE sources
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"' 
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(sourceID, source);
+
+-- create carbondioxide table
+
+CREATE TABLE carbondioxide (
+    id smallint auto_increment,
+    countryCode smallint not null,
+    recordYear year,
+    seriesID smallint not null, 
+    val float, 
+    sourceID smallint,
+    accessTime varchar(20),
+    primary key (id),
+    foreign key (countryCode) references countries (countryCode)
+    on delete restrict
+    on update cascade,
+    foreign key (seriesID) references series (seriesID)
+    on delete restrict
+    on update cascade,
+    foreign key (sourceID) references sources (sourceID)
+    on delete set null
+    on update cascade
+);
+
+LOAD DATA INFILE './database/CO2Emission.csv'
+INTO TABLE carbondioxide
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"' 
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(countryCode,recordYear,seriesID,val,sourceID,accessTime);
+
+-- create aid table
+
+CREATE TABLE aid (
+    id smallint auto_increment,
+    countryCode smallint not null,
+    recordYear year,
+    seriesID smallint not null, 
+    val float, 
+    sourceID smallint,
+    accessTime varchar(20),
+    primary key (id),
+    foreign key (countryCode) references countries (countryCode)
+    on delete restrict
+    on update cascade,
+    foreign key (seriesID) references series (seriesID)
+    on delete restrict
+    on update cascade,
+    foreign key (sourceID) references sources (sourceID)
+    on delete set null
+    on update cascade
+);
+
+LOAD DATA INFILE './database/DevelopmentAid.csv'
+INTO TABLE aid
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"' 
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(countryCode,recordYear,seriesID,val,sourceID,accessTime);
+
+-- create exchangeRates table
+
+CREATE TABLE exchangeRates (
+    id smallint auto_increment,
+    countryCode smallint not null,
+    recordYear year,
+    seriesID smallint not null, 
+    currency varchar(50),
+    val float, 
+    sourceID smallint,
+    accessTime varchar(20),
+    primary key (id),
+    foreign key (countryCode) references countries (countryCode)
+    on delete restrict
+    on update cascade,
+    foreign key (seriesID) references series (seriesID)
+    on delete restrict
+    on update cascade,
+    foreign key (sourceID) references sources (sourceID)
+    on delete set null
+    on update cascade
+);
+
+LOAD DATA INFILE './database/ExchangeRates.csv'
+INTO TABLE exchangeRates
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"' 
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(countryCode,recordYear,seriesID,@currency,val,sourceID,accessTime)
+SET currency = NULLIF(@currency, '');
+
+-- create health table
+
+CREATE TABLE health (
+    id smallint auto_increment,
+    countryCode smallint not null,
+    recordYear year,
+    seriesID smallint not null, 
+    val float, 
+    sourceID smallint,
+    accessTime varchar(20),
+    primary key (id),
+    foreign key (countryCode) references countries (countryCode)
+    on delete restrict
+    on update cascade,
+    foreign key (seriesID) references series (seriesID)
+    on delete restrict
+    on update cascade,
+    foreign key (sourceID) references sources (sourceID)
+    on delete set null
+    on update cascade
+);
+
+LOAD DATA INFILE './database/ExpenditureHealth.csv'
+INTO TABLE health
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"' 
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(countryCode,recordYear,seriesID,val,sourceID,accessTime);
+
+-- create trade table
+
+CREATE TABLE trade (
+    id smallint auto_increment,
+    countryCode smallint not null,
+    recordYear year,
+    seriesID smallint not null, 
+    val int, 
+    sourceID smallint,
+    accessTime varchar(20),
+    primary key (id),
+    foreign key (countryCode) references countries (countryCode)
+    on delete restrict
+    on update cascade,
+    foreign key (seriesID) references series (seriesID)
+    on delete restrict
+    on update cascade,
+    foreign key (sourceID) references sources (sourceID)
+    on delete set null
+    on update cascade
+);
+
+LOAD DATA INFILE './database/ImportsExports.csv'
+INTO TABLE trade
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"' 
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(countryCode,recordYear,seriesID,val,sourceID,accessTime);
+
+-- create internet table
+
+CREATE TABLE internet (
+    id smallint auto_increment,
+    countryCode smallint not null,
+    recordYear year,
+    seriesID smallint not null, 
+    val float, 
+    sourceID smallint,
+    accessTime varchar(20),
+    primary key (id),
+    foreign key (countryCode) references countries (countryCode)
+    on delete restrict
+    on update cascade,
+    foreign key (seriesID) references series (seriesID)
+    on delete restrict
+    on update cascade,
+    foreign key (sourceID) references sources (sourceID)
+    on delete set null
+    on update cascade
+);
+
+LOAD DATA INFILE './database/InternetUsage.csv'
+INTO TABLE internet
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"' 
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(countryCode,recordYear,seriesID,val,sourceID,accessTime);
+
+-- create threatenedSpecies table
+
+CREATE TABLE threatenedSpecies (
+    id smallint auto_increment,
+    countryCode smallint not null,
+    recordYear year,
+    seriesID smallint not null, 
+    val smallint, 
+    sourceID smallint,
+    accessTime varchar(20),
+    primary key (id),
+    foreign key (countryCode) references countries (countryCode)
+    on delete restrict
+    on update cascade,
+    foreign key (seriesID) references series (seriesID)
+    on delete restrict
+    on update cascade,
+    foreign key (sourceID) references sources (sourceID)
+    on delete set null
+    on update cascade
+);
+
+LOAD DATA INFILE './database/ThreatenedSpecies.csv'
+INTO TABLE threatenedSpecies
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"' 
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(countryCode,recordYear,seriesID,val,sourceID,accessTime);
+
+-- create tourism table
+
+CREATE TABLE tourism (
+    id smallint auto_increment,
+    countryCode smallint not null,
+    recordYear year,
+    seriesID smallint not null, 
+    val int, 
+    sourceID smallint,
+    accessTime varchar(20),
+    primary key (id),
+    foreign key (countryCode) references countries (countryCode)
+    on delete restrict
+    on update cascade,
+    foreign key (seriesID) references series (seriesID)
+    on delete restrict
+    on update cascade,
+    foreign key (sourceID) references sources (sourceID)
+    on delete set null
+    on update cascade
+);
+
+LOAD DATA INFILE './database/Tourism.csv'
+INTO TABLE tourism
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"' 
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(countryCode,recordYear,seriesID,val,sourceID,accessTime);
