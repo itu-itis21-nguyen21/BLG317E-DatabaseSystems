@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    </head>
+
+    <body>
+        <div class="home-container">
+            <h1>Welcome</h1>
+            <p>Choose a dataset to explore:</p>
+            <ul>
+                <li><a href="{{ url_for('co2_emissions') }}">CO2 Emissions</a></li>
+                <li><a href="{{ url_for('development_aid') }}">Development Aid</a></li>
+                <li><a href="{{ url_for('exchange_rates') }}">Exchange Rates</a></li>
+                <li><a href="{{ url_for('expenditure_health') }}">Expenditure Health</a></li>
+                <li><a href="{{ url_for('imports_exports') }}">Imports Exports</a></li>
+                <li><a href="{{ url_for('internet_usage') }}">Internet Usage</a></li>
+                <li><a href="{{ url_for('threatened_species') }}">Threatened Species</a></li>
+                <li><a href="{{ url_for('tourism') }}">Tourism</a></li>
+            </ul>
+        </div>
+    </body>
+
+</html>
