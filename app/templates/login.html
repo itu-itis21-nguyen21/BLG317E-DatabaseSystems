@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Login Page</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login Page</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
 
-<body>
-    <h1>Info</h1>
+    <body>
 
-    <div>
-        <form>
+        <div class="login-container">
+            <h1>Login</h1>
 
-            <div class="container">
-                <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" required>
+            <form id="login-form" method="POST" action="/login">
+
+                <label for="username"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="username" required>
+                    
+                <label for="password"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password" required>
+
+                <button type="submit">Log In</button>
                 
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
-
-                <button type="submit">Login</button>
                 <label>
                 <input type="checkbox" checked="checked" name="remember"> Remember me
                 </label>
-            </div>
-        
-            </form>
-    </div>  
 
-</body>
+            </form>
+
+        </div>
+
+    </body>
 
 </html>
