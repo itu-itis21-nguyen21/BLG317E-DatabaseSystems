@@ -1,4 +1,4 @@
-CREATE DATABASE un_stats23;
+CREATE DATABASE IF NOT EXISTS un_stats23;
 USE un_stats23;
 
 -- create regions table
