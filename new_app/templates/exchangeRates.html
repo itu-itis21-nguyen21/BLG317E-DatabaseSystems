@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exchange Rates Details</title>
+</head>
+<body>
+    <h1>Exchange Rates Details</h1>
+    
+    <!-- Add Button -->
+    <button onclick="window.location.href='/exchangeRates/add'">Add New Record</button>
+    
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Country Name</th>
+            <th>Series</th>
+            <th>Currency</th>
+            <th>Value</th>
+            <th>Unit</th>
+            <th>Record Year</th>
+            <th>Source</th>
+            <th>Actions</th>
+        </tr>
+        {% for detail in details %}
+        <tr>
+            <td>{{ detail.id }}</td>
+            <td>{{ detail.country_name }}</td>
+            <td>{{ detail.series }}</td>
+            <td>{{ detail.currency }}</td>
+            <td>{{ detail.value }}</td>
+            <td>{{ detail.unit }}</td>
+            <td>{{ detail.record_year }}</td>
+            <td>{{ detail.source }}</td>
+            <td>
+                <!-- Edit Button -->
+                <button onclick="window.location.href='/exchangeRates/edit/{{ detail.id }}'">Edit</button>
+                <!-- Delete Button -->
+                <form action="/exchangeRates/delete/{{ detail.id }}" method="POST" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>                
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/">Back to Main Page</a>
+</body>
+</html>
