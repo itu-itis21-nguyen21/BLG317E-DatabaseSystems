@@ -5,6 +5,8 @@ from pages.exchangeRates import exchangeRates_bp
 from pages.tourism import tourism_bp
 from pages.carbondioxide import carbondioxide_bp
 from pages.threatenedSpecies import threatenedSpecies_bp
+from pages.internet import internet_bp
+from pages.health import health_bp
 
 app = Flask(__name__)
 
@@ -15,6 +17,8 @@ app.register_blueprint(exchangeRates_bp)
 app.register_blueprint(tourism_bp)
 app.register_blueprint(carbondioxide_bp)
 app.register_blueprint(threatenedSpecies_bp)
+app.register_blueprint(internet_bp)
+app.register_blueprint(health_bp)
 
 @app.route('/')
 def main_page():
