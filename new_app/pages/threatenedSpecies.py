@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect
+from flask_login import login_required, current_user
 from database import connection
 
 threatenedSpecies_bp = Blueprint('threatenedSpecies', __name__)
@@ -31,11 +32,13 @@ def get_threatenedSpecies_details():
     return result
 
 @threatenedSpecies_bp.route('/threatenedSpecies')
+@login_required
 def page1():
     threatenedSpecies_details = get_threatenedSpecies_details()
     return render_template('threatenedSpecies.html', details=threatenedSpecies_details)
 
 @threatenedSpecies_bp.route('/threatenedSpecies/add', methods=['GET', 'POST'])
+@login_required
 def add_record():
     if request.method == 'POST':
         # Retrieve form data
@@ -60,6 +63,7 @@ def add_record():
     return render_template('add.html')
 
 @threatenedSpecies_bp.route('/threatenedSpecies/edit/<int:record_id>', methods=['GET', 'POST'])
+@login_required
 def edit_record(record_id):
     if request.method == 'POST':
         # Retrieve updated data
@@ -89,6 +93,7 @@ def edit_record(record_id):
     return render_template('edit.html', record=record)
 
 @threatenedSpecies_bp.route('/threatenedSpecies/delete/<int:record_id>', methods=['POST'])
+@login_required
 def delete_record(record_id):
     cursor = connection.cursor()
     sql = "DELETE FROM threatenedSpecies WHERE id = %s"

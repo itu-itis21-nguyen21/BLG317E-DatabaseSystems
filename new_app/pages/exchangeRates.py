@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect
+from flask_login import login_required, current_user
 from database import connection
 
 exchangeRates_bp = Blueprint('exchangeRates', __name__)
@@ -32,11 +33,13 @@ def get_exchangeRates_details():
     return result
 
 @exchangeRates_bp.route('/exchangeRates')
+@login_required
 def page1():
     exchangeRates_details = get_exchangeRates_details()
     return render_template('exchangeRates.html', details=exchangeRates_details)
 
 @exchangeRates_bp.route('/exchangeRates/add', methods=['GET', 'POST'])
+@login_required
 def add_record():
     if request.method == 'POST':
         country_code = request.form['country_code']
@@ -59,6 +62,7 @@ def add_record():
     return render_template('add.html')
 
 @exchangeRates_bp.route('/exchangeRates/edit/<int:record_id>', methods=['GET', 'POST'])
+@login_required
 def edit_record(record_id):
     if request.method == 'POST':
         value = request.form['value']
@@ -85,6 +89,7 @@ def edit_record(record_id):
     return render_template('edit.html', record=record)
 
 @exchangeRates_bp.route('/exchangeRates/delete/<int:record_id>', methods=['POST'])
+@login_required
 def delete_record(record_id):
     cursor = connection.cursor()
     sql = "DELETE FROM exchangeRates WHERE id = %s"

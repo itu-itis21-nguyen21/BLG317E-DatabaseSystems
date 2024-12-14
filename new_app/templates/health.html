@@ -3,15 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aid Details</title>
+    <title>Health Expenditure Details</title>
 </head>
 <body>
-    <h1>Aid Details</h1>
+    <h1>Health Expenditure Details</h1>
     
-    <!-- Add Button -->
     {% if is_admin %}
     <button onclick="window.location.href='/aid/add'">Add New Record</button>
     {% endif %}
+    <!-- Filtering -->
+    <form method="GET" action="/health/search">
+        <label for="country_name">Search by Country: </label>
+        <input type="text" name="country_name" id="country_name" placeholder="Enter country name">
+        
+        <label for="series_name">Search by Series: </label>
+        <select name="series_name" id="series_name">
+            <option value="">-- Select Series --</option>
+            <option value="Current health expenditure">Current health expenditure</option>
+            <option value="Domestic general government health expenditure">Domestic general government health expenditure</option>
+        </select>
+        
+        <button type="submit">Search</button>
+    </form>
 
     <table border="1">
         <tr>

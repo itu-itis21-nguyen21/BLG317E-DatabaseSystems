@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect
+from flask_login import login_required, current_user
 from database import connection
 
 tourism_bp = Blueprint('tourism', __name__)
@@ -31,11 +32,13 @@ def get_tourism_details():
     return result
 
 @tourism_bp.route('/tourism')
+@login_required
 def page1():
     tourism_details = get_tourism_details()
     return render_template('tourism.html', details=tourism_details)
 
 @tourism_bp.route('/tourism/add', methods=['GET', 'POST'])
+@login_required
 def add_record():
     if request.method == 'POST':
         # Retrieve form data
@@ -60,6 +63,7 @@ def add_record():
     return render_template('add.html')
 
 @tourism_bp.route('/tourism/edit/<int:record_id>', methods=['GET', 'POST'])
+@login_required
 def edit_record(record_id):
     if request.method == 'POST':
         # Retrieve updated data
@@ -89,6 +93,7 @@ def edit_record(record_id):
     return render_template('edit.html', record=record)
 
 @tourism_bp.route('/tourism/delete/<int:record_id>', methods=['POST'])
+@login_required
 def delete_record(record_id):
     cursor = connection.cursor()
     sql = "DELETE FROM tourism WHERE id = %s"
