@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect
+from flask_login import login_required, current_user
 from database import connection
 
 internet_bp = Blueprint('internet', __name__)
@@ -31,11 +32,13 @@ def get_internet_details():
     return result
 
 @internet_bp.route('/internet')
+@login_required
 def page1():
     internet_details = get_internet_details()
     return render_template('internet.html', details=internet_details)
 
 @internet_bp.route('/internet/add', methods=['GET', 'POST'])
+@login_required
 def add_record():
     if request.method == 'POST':
         country_code = request.form['country_code']
@@ -58,6 +61,7 @@ def add_record():
     return render_template('add.html')
 
 @internet_bp.route('/internet/edit/<int:record_id>', methods=['GET', 'POST'])
+@login_required
 def edit_record(record_id):
     if request.method == 'POST':
         value = request.form['value']
@@ -84,6 +88,7 @@ def edit_record(record_id):
     return render_template('edit.html', record=record)
 
 @internet_bp.route('/internet/delete/<int:record_id>', methods=['POST'])
+@login_required
 def delete_record(record_id):
     cursor = connection.cursor()
     sql = "DELETE FROM internet WHERE id = %s"
@@ -94,6 +99,7 @@ def delete_record(record_id):
     return redirect('/internet')
 
 @internet_bp.route('/internet/search', methods=['GET'])
+@login_required
 def search_by_country_and_series():
     country_name = request.args.get('country_name', '').strip()
     series_name = request.args.get('series_name', '').strip()

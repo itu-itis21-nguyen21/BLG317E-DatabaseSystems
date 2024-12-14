@@ -9,8 +9,10 @@
     <h1>Aid Details</h1>
     
     <!-- Add Button -->
+    {% if is_admin %}
     <button onclick="window.location.href='/aid/add'">Add New Record</button>
-    
+    {% endif %}
+
     <table border="1">
         <tr>
             <th>ID</th>
@@ -20,7 +22,9 @@
             <th>Unit</th>
             <th>Record Year</th>
             <th>Source</th>
-            <th>Actions</th>
+            {% if is_admin %}
+            <th></th>
+            {% endif %}
         </tr>
         {% for detail in details %}
         <tr>
@@ -31,14 +35,16 @@
             <td>{{ detail.unit }}</td>
             <td>{{ detail.record_year }}</td>
             <td>{{ detail.source }}</td>
+            {% if is_admin %}
             <td>
                 <!-- Edit Button -->
                 <button onclick="window.location.href='/aid/edit/{{ detail.id }}'">Edit</button>
                 <!-- Delete Button -->
                 <form action="/aid/delete/{{ detail.id }}" method="POST" style="display:inline;">
                     <button type="submit">Delete</button>
-                </form>                
+                </form>
             </td>
+            {% endif %}
         </tr>
         {% endfor %}
     </table>

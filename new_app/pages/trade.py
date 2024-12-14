@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect
+from flask_login import login_required, current_user
 from database import connection
 
 trade_bp = Blueprint('trade', __name__)
@@ -31,11 +32,13 @@ def get_trade_details():
     return result
 
 @trade_bp.route('/trade')
+@login_required
 def page1():
     trade_details = get_trade_details()
     return render_template('trade.html', details=trade_details)
 
 @trade_bp.route('/trade/add', methods=['GET', 'POST'])
+@login_required
 def add_record():
     if request.method == 'POST':
         country_code = request.form['country_code']
@@ -58,6 +61,7 @@ def add_record():
     return render_template('add.html')
 
 @trade_bp.route('/trade/edit/<int:record_id>', methods=['GET', 'POST'])
+@login_required
 def edit_record(record_id):
     if request.method == 'POST':
         value = request.form['value']
@@ -84,6 +88,7 @@ def edit_record(record_id):
     return render_template('edit.html', record=record)
 
 @trade_bp.route('/trade/delete/<int:record_id>', methods=['POST'])
+@login_required
 def delete_record(record_id):
     cursor = connection.cursor()
     sql = "DELETE FROM trade WHERE id = %s"

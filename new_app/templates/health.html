@@ -8,8 +8,9 @@
 <body>
     <h1>Health Expenditure Details</h1>
     
-    <!-- Add Button -->
-    <button onclick="window.location.href='/health/add'">Add New Record</button>
+    {% if is_admin %}
+    <button onclick="window.location.href='/aid/add'">Add New Record</button>
+    {% endif %}
     <!-- Filtering -->
     <form method="GET" action="/health/search">
         <label for="country_name">Search by Country: </label>
@@ -34,7 +35,9 @@
             <th>Unit</th>
             <th>Record Year</th>
             <th>Source</th>
-            <th>Actions</th>
+            {% if is_admin %}
+            <th></th>
+            {% endif %}
         </tr>
         {% for detail in details %}
         <tr>
@@ -45,14 +48,16 @@
             <td>{{ detail.unit }}</td>
             <td>{{ detail.record_year }}</td>
             <td>{{ detail.source }}</td>
+            {% if is_admin %}
             <td>
                 <!-- Edit Button -->
-                <button onclick="window.location.href='/health/edit/{{ detail.id }}'">Edit</button>
+                <button onclick="window.location.href='/aid/edit/{{ detail.id }}'">Edit</button>
                 <!-- Delete Button -->
-                <form action="/health/delete/{{ detail.id }}" method="POST" style="display:inline;">
+                <form action="/aid/delete/{{ detail.id }}" method="POST" style="display:inline;">
                     <button type="submit">Delete</button>
-                </form>                
+                </form>
             </td>
+            {% endif %}
         </tr>
         {% endfor %}
     </table>

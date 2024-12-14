@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect
+from flask_login import login_required, current_user
 from database import connection
 
 carbondioxide_bp = Blueprint('carbondioxide', __name__)
@@ -31,11 +32,13 @@ def get_carbondioxide_details():
     return result
 
 @carbondioxide_bp.route('/carbondioxide')
+@login_required
 def page1():
     carbondioxide_details = get_carbondioxide_details()
     return render_template('carbondioxide.html', details=carbondioxide_details)
 
 @carbondioxide_bp.route('/carbondioxide/add', methods=['GET', 'POST'])
+@login_required
 def add_record():
     if request.method == 'POST':
         # Retrieve form data
@@ -60,6 +63,7 @@ def add_record():
     return render_template('add.html')
 
 @carbondioxide_bp.route('/carbondioxide/edit/<int:record_id>', methods=['GET', 'POST'])
+@login_required
 def edit_record(record_id):
     if request.method == 'POST':
         # Retrieve updated data
@@ -89,6 +93,7 @@ def edit_record(record_id):
     return render_template('edit.html', record=record)
 
 @carbondioxide_bp.route('/carbondioxide/delete/<int:record_id>', methods=['POST'])
+@login_required
 def delete_record(record_id):
     cursor = connection.cursor()
     sql = "DELETE FROM carbondioxide WHERE id = %s"
