@@ -1,0 +1,2 @@
+# Ignore database specification file
+new_app/database.py
