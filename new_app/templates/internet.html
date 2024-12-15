@@ -10,7 +10,7 @@
     
     <!-- Add Button -->
     {% if is_admin %}
-    <button onclick="window.location.href='/aid/add'">Add New Record</button>
+    <button onclick="window.location.href='/internet/add'">Add New Record</button>
     {% endif %}
     <!-- Filtering -->
     <form method="GET" action="/internet/search">
@@ -51,9 +51,9 @@
             {% if is_admin %}
             <td>
                 <!-- Edit Button -->
-                <button onclick="window.location.href='/aid/edit/{{ detail.id }}'">Edit</button>
+                <button onclick="window.location.href='/internet/edit/{{ detail.id }}'">Edit</button>
                 <!-- Delete Button -->
-                <form action="/aid/delete/{{ detail.id }}" method="POST" style="display:inline;">
+                <form action="/internet/delete/{{ detail.id }}" method="POST" style="display:inline;">
                     <button type="submit">Delete</button>
                 </form>
             </td>

@@ -9,7 +9,7 @@
     <h1>Health Expenditure Details</h1>
     
     {% if is_admin %}
-    <button onclick="window.location.href='/aid/add'">Add New Record</button>
+    <button onclick="window.location.href='/health/add'">Add New Record</button>
     {% endif %}
     <!-- Filtering -->
     <form method="GET" action="/health/search">
@@ -51,9 +51,9 @@
             {% if is_admin %}
             <td>
                 <!-- Edit Button -->
-                <button onclick="window.location.href='/aid/edit/{{ detail.id }}'">Edit</button>
+                <button onclick="window.location.href='/health/edit/{{ detail.id }}'">Edit</button>
                 <!-- Delete Button -->
-                <form action="/aid/delete/{{ detail.id }}" method="POST" style="display:inline;">
+                <form action="/health/delete/{{ detail.id }}" method="POST" style="display:inline;">
                     <button type="submit">Delete</button>
                 </form>
             </td>

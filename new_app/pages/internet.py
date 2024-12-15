@@ -35,19 +35,47 @@ def get_internet_details():
 @login_required
 def page1():
     internet_details = get_internet_details()
-    return render_template('internet.html', details=internet_details)
+    return render_template('internet.html', details=internet_details, is_admin=(current_user.id == "admin"))
 
 @internet_bp.route('/internet/add', methods=['GET', 'POST'])
 @login_required
 def add_record():
+    if current_user.id != "admin":
+        return redirect('/internet')
+    
+    cursor = connection.cursor()
+
     if request.method == 'POST':
-        country_code = request.form['country_code']
-        series_id = request.form['series_id']
+        # Retrieve form data
+        country_name = request.form['country_name']
+        series = request.form['series']
         value = request.form['value']
         record_year = request.form['record_year']
-        source_id = request.form['source_id']
+        source = request.form['source']
+
+        # Get the corresponding country code from the database
+        cursor.execute("SELECT countryCode FROM countries WHERE country = %s", (country_name,))
+        result = cursor.fetchone()
+        if not result:
+            cursor.close()
+            return "Error: Selected country does not exist in the database.", 400
+        country_code = result[0]
         
-        cursor = connection.cursor()
+        cursor.execute("SELECT seriesID FROM series WHERE series = %s", (series,))
+        result = cursor.fetchone()
+        if not result:
+            cursor.close()
+            return "Error: Selected series does not exist in the database.", 400
+        series_id = result[0]
+
+        cursor.execute("SELECT sourceID FROM sources WHERE source = %s", (source,))
+        result = cursor.fetchone()
+        if not result:
+            cursor.close()
+            return "Error: Selected source does not exist in the database.", 400
+        source_id = result[0]
+
+        # Insert into the internet table
         sql = """
             INSERT INTO internet (countryCode, seriesID, val, recordYear, sourceID)
             VALUES (%s, %s, %s, %s, %s)
@@ -55,14 +83,28 @@ def add_record():
         cursor.execute(sql, (country_code, series_id, value, record_year, source_id))
         connection.commit()
         cursor.close()
-        
+
         return redirect('/internet')
     
-    return render_template('add.html')
+    # Fetch country names only (not tuples)
+    cursor.execute("SELECT country FROM countries ORDER BY country")
+    countries = [row[0] for row in cursor.fetchall()]  # Extract the first element of each tuple
+
+    cursor.execute("SELECT DISTINCT series FROM series INNER JOIN internet ON series.seriesID = internet.seriesID")
+    series = [row[0] for row in cursor.fetchall()]
+
+    cursor.execute("SELECT DISTINCT source FROM sources INNER JOIN internet ON sources.sourceID = internet.sourceID")
+    sources = [row[0] for row in cursor.fetchall()]
+
+    cursor.close()
+
+    return render_template('add.html', countries=countries, series=series, sources=sources)
 
 @internet_bp.route('/internet/edit/<int:record_id>', methods=['GET', 'POST'])
 @login_required
 def edit_record(record_id):
+    if current_user.id != "admin":
+        return redirect('/internet')
     if request.method == 'POST':
         value = request.form['value']
         record_year = request.form['record_year']
@@ -90,6 +132,8 @@ def edit_record(record_id):
 @internet_bp.route('/internet/delete/<int:record_id>', methods=['POST'])
 @login_required
 def delete_record(record_id):
+    if current_user.id != "admin":
+        return redirect('/internet')
     cursor = connection.cursor()
     sql = "DELETE FROM internet WHERE id = %s"
     cursor.execute(sql, (record_id,))
