@@ -54,9 +54,9 @@
             {% if is_admin %}
             <td>
                 <!-- Edit Button -->
-                <button onclick="window.location.href='/aid/edit/{{ detail.id }}'">Edit</button>
+                <button onclick="window.location.href='/exchangeRates/edit/{{ detail.id }}'">Edit</button>
                 <!-- Delete Button -->
-                <form action="/aid/delete/{{ detail.id }}" method="POST" style="display:inline;">
+                <form action="/exchangeRates/delete/{{ detail.id }}" method="POST" style="display:inline;">
                     <button type="submit">Delete</button>
                 </form>
             </td>
@@ -64,6 +64,16 @@
         </tr>
         {% endfor %}
     </table>
+
+    <!-- Previous Button -->
+    <form action="/exchangeRates/previous" method="POST">
+        <button type="submit"> < </button>
+    </form>
+    <!-- Next Button -->
+    <form action="/exchangeRates/next" method="POST">
+        <button type="submit"> > </button>
+    </form>
+
     <a href="/">Back to Main Page</a>
 </body>
 </html>

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect
+from flask import Blueprint, render_template, request, redirect, session
 from flask_login import login_required, current_user
 from database import connection
 
@@ -30,6 +30,8 @@ def get_aid_details():
 @aid_bp.route('/aid')
 @login_required
 def page1():
+    session['current_page'] = 1
+    
     aid_details = get_aid_details()
     return render_template('aid.html', details=aid_details)
 
@@ -140,4 +142,69 @@ def search_by_country_and_series():
     cursor.close()
     
     # Render the filtered results
+    return render_template('aid.html', details=results)
+
+@aid_bp.route('/aid/next', methods=['POST'])
+def next_record():
+    cursor = connection.cursor(dictionary=True)
+    # Example of incrementing the offset (assuming you store current page in session)
+    current_page = session.get('current_page', 1) + 1
+    offset = (current_page - 1) * 20
+    sql = f"""
+        SELECT
+            aid.id AS id,
+            countries.country AS country_name,
+            series.series AS series,
+            aid.val AS value,
+            series.unit AS unit,
+            aid.recordYear AS record_year,
+            sources.source AS source
+        FROM aid 
+        JOIN countries ON aid.countryCode = countries.countryCode
+        JOIN series ON aid.seriesID = series.seriesID
+        JOIN sources ON aid.sourceID = sources.sourceID
+        ORDER BY id ASC
+        LIMIT 20 OFFSET {offset};
+    """
+    cursor.execute(sql)
+    results = cursor.fetchall()
+    cursor.close()
+    
+    # Update the session page count
+    session['current_page'] = current_page
+    return render_template('aid.html', details=results)
+
+
+@aid_bp.route('/aid/previous', methods=['POST'])
+def previous_record():
+    cursor = connection.cursor(dictionary=True)
+    current_page = session.get('current_page', 1)
+
+    # Ensure we don't go below page 1
+    if current_page > 1:
+        current_page -= 1
+
+    offset = (current_page - 1) * 20
+    sql = f"""
+        SELECT
+            aid.id AS id,
+            countries.country AS country_name,
+            series.series AS series,
+            aid.val AS value,
+            series.unit AS unit,
+            aid.recordYear AS record_year,
+            sources.source AS source
+        FROM aid 
+        JOIN countries ON aid.countryCode = countries.countryCode
+        JOIN series ON aid.seriesID = series.seriesID
+        JOIN sources ON aid.sourceID = sources.sourceID
+        ORDER BY id ASC
+        LIMIT 20 OFFSET {offset};
+    """
+    cursor.execute(sql)
+    results = cursor.fetchall()
+    cursor.close()
+
+    # Update the session page count
+    session['current_page'] = current_page
     return render_template('aid.html', details=results)
