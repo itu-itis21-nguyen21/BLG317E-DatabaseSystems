@@ -31,14 +31,11 @@ def get_aid_details():
 @login_required
 def page1():
     aid_details = get_aid_details()
-    return render_template('aid.html', details=aid_details, is_admin=(current_user.id == "admin"))
+    return render_template('aid.html', details=aid_details)
 
 @aid_bp.route('/aid/add', methods=['GET', 'POST'])
 @login_required
 def add_record():
-    if current_user.id != "admin":
-        return redirect('/aid')
-
     if request.method == 'POST':
         country_code = request.form['country_code']
         series_id = request.form['series_id']
@@ -62,9 +59,6 @@ def add_record():
 @aid_bp.route('/aid/edit/<int:record_id>', methods=['GET', 'POST'])
 @login_required
 def edit_record(record_id):
-    if current_user.id != "admin":
-        return redirect('/aid')
-
     if request.method == 'POST':
         value = request.form['value']
         record_year = request.form['record_year']
@@ -92,9 +86,6 @@ def edit_record(record_id):
 @aid_bp.route('/aid/delete/<int:record_id>', methods=['POST'])
 @login_required
 def delete_record(record_id):
-    if current_user.id != "admin":
-        return redirect('/aid')
-
     cursor = connection.cursor()
     sql = "DELETE FROM aid WHERE id = %s"
     cursor.execute(sql, (record_id,))
@@ -102,3 +93,51 @@ def delete_record(record_id):
     cursor.close()
 
     return redirect('/aid')
+
+@aid_bp.route('/aid/search', methods=['GET'])
+@login_required
+def search_by_country_and_series():
+    country_name = request.args.get('country_name', '').strip()
+    series_name = request.args.get('series_name', '').strip()
+    
+    # Build the query dynamically based on provided filters
+    filters = []
+    query = """
+        SELECT
+            aid.id AS id,
+            countries.country AS country_name,
+            series.series AS series,
+            aid.val AS value,
+            series.unit AS unit,
+            aid.recordYear AS record_year,
+            sources.source AS source
+        FROM aid 
+        JOIN countries ON aid.countryCode = countries.countryCode
+        JOIN series ON aid.seriesID = series.seriesID
+        JOIN sources ON aid.sourceID = sources.sourceID
+    """
+    
+    if country_name:
+        filters.append("countries.country LIKE %s")
+    if series_name:
+        filters.append("series.series = %s")
+    
+    if filters:
+        query += " WHERE " + " AND ".join(filters)
+    
+    query += " ORDER BY id ASC"
+    
+    # Execute the query with dynamic filters
+    params = []
+    if country_name:
+        params.append(f"%{country_name}%")
+    if series_name:
+        params.append(series_name)
+    
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute(query, tuple(params))
+    results = cursor.fetchall()
+    cursor.close()
+    
+    # Render the filtered results
+    return render_template('aid.html', details=results)

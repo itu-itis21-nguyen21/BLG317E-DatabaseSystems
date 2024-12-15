@@ -98,3 +98,52 @@ def delete_record(record_id):
     cursor.close()
     
     return redirect('/exchangeRates')
+
+@exchangeRates_bp.route('/exchangeRates/search', methods=['GET'])
+@login_required
+def search_by_country_and_series():
+    country_name = request.args.get('country_name', '').strip()
+    series_name = request.args.get('series_name', '').strip()
+    
+    # Build the query dynamically based on provided filters
+    filters = []
+    query = """
+        SELECT
+            exchangeRates.id AS id,
+            countries.country AS country_name,
+            series.series AS series,
+            exchangeRates.currency AS currency,
+            exchangeRates.val AS value,
+            series.unit AS unit,
+            exchangeRates.recordYear AS record_year,
+            sources.source AS source
+        FROM exchangeRates 
+        JOIN countries ON exchangeRates.countryCode = countries.countryCode
+        JOIN series ON exchangeRates.seriesID = series.seriesID
+        JOIN sources ON exchangeRates.sourceID = sources.sourceID
+    """
+    
+    if country_name:
+        filters.append("countries.country LIKE %s")
+    if series_name:
+        filters.append("series.series = %s")
+    
+    if filters:
+        query += " WHERE " + " AND ".join(filters)
+    
+    query += " ORDER BY id ASC"
+    
+    # Execute the query with dynamic filters
+    params = []
+    if country_name:
+        params.append(f"%{country_name}%")
+    if series_name:
+        params.append(series_name)
+    
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute(query, tuple(params))
+    results = cursor.fetchall()
+    cursor.close()
+    
+    # Render the filtered results
+    return render_template('exchangeRates.html', details=results)

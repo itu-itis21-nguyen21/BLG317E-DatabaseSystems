@@ -12,7 +12,21 @@
     {% if is_admin %}
     <button onclick="window.location.href='/aid/add'">Add New Record</button>
     {% endif %}
-    
+    <!-- Filtering -->
+    <form method="GET" action="/exchangeRates/search">
+        <label for="country_name">Search by Country: </label>
+        <input type="text" name="country_name" id="country_name" placeholder="Enter country name">
+        
+        <label for="series_name">Search by Series: </label>
+        <select name="series_name" id="series_name">
+            <option value="">-- Select Series --</option>
+            <option value="Exchange rates: end of period">Exchange rates: end of period</option>
+            <option value="Exchange rates: period average">Exchange rates: period average</option>
+        </select>
+        
+        <button type="submit">Search</button>
+    </form>    
+
     <table border="1">
         <tr>
             <th>ID</th>

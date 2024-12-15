@@ -12,6 +12,21 @@
     {% if is_admin %}
     <button onclick="window.location.href='/aid/add'">Add New Record</button>
     {% endif %}
+    <!-- Filtering -->
+    <form method="GET" action="/aid/search">
+        <label for="country_name">Search by Country: </label>
+        <input type="text" name="country_name" id="country_name" placeholder="Enter country name">
+        
+        <label for="series_name">Search by Series: </label>
+        <select name="series_name" id="series_name">
+            <option value="">-- Select Series --</option>
+            <option value="Net official development assistance received: Bilateral">Net official development assistance received: Bilateral</option>
+            <option value="Net official development assistance received: Multilateral">Net official development assistance received: Multilateral</option>
+            <option value="Net official development assistance received: Total">Net official development assistance received: Total</option>
+        </select>
+        
+        <button type="submit">Search</button>
+    </form> 
 
     <table border="1">
         <tr>

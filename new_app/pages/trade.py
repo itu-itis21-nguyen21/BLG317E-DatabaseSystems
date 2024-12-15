@@ -97,3 +97,51 @@ def delete_record(record_id):
     cursor.close()
     
     return redirect('/trade')
+
+@trade_bp.route('/trade/search', methods=['GET'])
+@login_required
+def search_by_country_and_series():
+    country_name = request.args.get('country_name', '').strip()
+    series_name = request.args.get('series_name', '').strip()
+    
+    # Build the query dynamically based on provided filters
+    filters = []
+    query = """
+        SELECT
+            trade.id AS id,
+            countries.country AS country_name,
+            series.series AS series,
+            trade.val AS value,
+            series.unit AS unit,
+            trade.recordYear AS record_year,
+            sources.source AS source
+        FROM trade 
+        JOIN countries ON trade.countryCode = countries.countryCode
+        JOIN series ON trade.seriesID = series.seriesID
+        JOIN sources ON trade.sourceID = sources.sourceID
+    """
+    
+    if country_name:
+        filters.append("countries.country LIKE %s")
+    if series_name:
+        filters.append("series.series = %s")
+    
+    if filters:
+        query += " WHERE " + " AND ".join(filters)
+    
+    query += " ORDER BY id ASC"
+    
+    # Execute the query with dynamic filters
+    params = []
+    if country_name:
+        params.append(f"%{country_name}%")
+    if series_name:
+        params.append(series_name)
+    
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute(query, tuple(params))
+    results = cursor.fetchall()
+    cursor.close()
+    
+    # Render the filtered results
+    return render_template('trade.html', details=results)
