@@ -1,0 +1,49 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #D4DFE8; /* Jasny niebieski tło */
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #555E7B; /* Subtelny, ciemny niebieski */
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.button-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    max-width: 800px;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.button {
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background-color: #5b92e5;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.button:hover {
+    background-color: #3f4d63;
+}
+
+.button:active {
+    background-color: #2f3e53; /* Jeszcze ciemniejszy odcień niebieskiego */
+}

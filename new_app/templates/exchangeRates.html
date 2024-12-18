@@ -3,15 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Exchange Rates Details</title>
 </head>
 <body>
-    <h1>Exchange Rates Details</h1>
-    
-    <!-- Add Button -->
-    {% if is_admin %}
-    <button onclick="window.location.href='/exchangeRates/add'">Add New Record</button>
-    {% endif %}
+
+    <div class="navbar">
+        <span class="title">EXCHANGE RATES DETAILS</span>
+
+        {% if is_admin %}
+            <button class="add-record" onclick="window.location.href='/exchangeRates/add'">Add New Record</button>
+        {% endif %}
+    </div>
+
+
+
+
     <!-- Filtering -->
     <form method="GET" action="/exchangeRates/search">
         <label for="country_name">Search by Country: </label>
@@ -24,7 +31,7 @@
             <option value="Exchange rates: period average">Exchange rates: period average</option>
         </select>
         
-        <button type="submit">Search</button>
+        <button type="submit" class="search">Search</button>
     </form>
     
     <table border="1">
@@ -52,12 +59,13 @@
             <td>{{ detail.record_year }}</td>
             <td>{{ detail.source }}</td>
             {% if is_admin %}
-            <td>
+
+            <td class="actions">
                 <!-- Edit Button -->
-                <button onclick="window.location.href='/exchangeRates/edit/{{ detail.id }}'">Edit</button>
+                <button class="edit" onclick="window.location.href='/exchangeRates/edit/{{ detail.id }}'">Edit</button>
                 <!-- Delete Button -->
                 <form action="/exchangeRates/delete/{{ detail.id }}" method="POST" style="display:inline;">
-                    <button type="submit">Delete</button>
+                    <button type="submit" class="delete">Delete</button>
                 </form>
             </td>
             {% endif %}

@@ -3,15 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>CO2</title>
 </head>
 <body>
-    <h1>CO2 Details</h1>
-    
-    <!-- Add Button -->
-    {% if is_admin %}
-    <button onclick="window.location.href='/carbondioxide/add'">Add New Record</button>
-    {% endif %}
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <span class="title">CO2 DETAILS</span>
+
+        {% if is_admin %}
+            <button class="add-record" onclick="window.location.href='/carbondioxide/add'">Add New Record</button>
+        {% endif %}
+    </div>
+
+
     <!-- Filtering -->
     <form method="GET" action="/carbondioxide/search">
         <label for="country_name">Search by Country: </label>
@@ -24,7 +30,7 @@
             <option value="Emissions per capita">Emissions per capita</option>
         </select>
 
-        <button type="submit">Search</button>
+        <button type="submit" class="search">Search</button>
     </form>
 
     <table border="1">
@@ -49,19 +55,26 @@
             <td>{{ detail.unit }}</td>
             <td>{{ detail.record_year }}</td>
             <td>{{ detail.source }}</td>
+
             {% if is_admin %}
-            <td>
+            <td class="actions">
+
                 <!-- Edit Button -->
-                <button onclick="window.location.href='/carbondioxide/edit/{{ detail.id }}'">Edit</button>
+                <button class="edit" onclick="window.location.href='/carbondioxide/edit/{{ detail.id }}'">Edit</button>
+
                 <!-- Delete Button -->
                 <form action="/carbondioxide/delete/{{ detail.id }}" method="POST" style="display:inline;">
-                    <button type="submit">Delete</button>
+                    <button type="submit" class="delete">Delete</button>
                 </form>
+
             </td>
             {% endif %}
+
         </tr>
         {% endfor %}
+
     </table>
+
     <a href="/">Back to Main Page</a>
 </body>
 </html>

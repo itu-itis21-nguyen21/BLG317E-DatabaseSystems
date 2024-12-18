@@ -3,15 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
     <title>Tourism</title>
 </head>
 <body>
-    <h1>Tourism Details</h1>
-    
-    <!-- Add Button -->
-    {% if is_admin %}
-    <button onclick="window.location.href='/tourism/add'">Add New Record</button>
-    {% endif %}
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <span class="title">TOURISM DETAILS</span>
+
+        {% if is_admin %}
+            <button class="add-record" onclick="window.location.href='/tourism/add'">Add New Record</button>
+        {% endif %}
+    </div>
+
     <!-- Filtering -->
     <form method="GET" action="/tourism/search">
         <label for="country_name">Search by Country: </label>
@@ -24,7 +29,7 @@
             <option value="Tourist/visitor arrivals">Tourist/visitor arrivals</option>
         </select>
         
-        <button type="submit">Search</button>
+        <button type="submit" class="search">Search</button>
     </form>
     
     <table border="1">
@@ -37,7 +42,7 @@
             <th>Record Year</th>
             <th>Source</th>
             {% if is_admin %}
-            <th></th>
+            <th>Actions</th>
             {% endif %}
         </tr>
         {% for detail in details %}
@@ -49,13 +54,15 @@
             <td>{{ detail.unit }}</td>
             <td>{{ detail.record_year }}</td>
             <td>{{ detail.source }}</td>
+
             {% if is_admin %}
-            <td>
+            <td class="actions">
                 <!-- Edit Button -->
-                <button onclick="window.location.href='/tourism/edit/{{ detail.id }}'">Edit</button>
+                <button class="edit" onclick="window.location.href='/tourism/edit/{{ detail.id }}'">Edit</button>
+
                 <!-- Delete Button -->
                 <form action="/tourism/delete/{{ detail.id }}" method="POST" style="display:inline;">
-                    <button type="submit">Delete</button>
+                    <button type="submit" class="delete">Delete</button>
                 </form>
             </td>
             {% endif %}

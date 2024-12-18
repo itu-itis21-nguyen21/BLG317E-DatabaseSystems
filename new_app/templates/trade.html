@@ -3,15 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Trade Details</title>
 </head>
 <body>
-    <h1>Trade Details</h1>
-    
-    <!-- Add Button -->
-    {% if is_admin %}
-    <button onclick="window.location.href='/trade/add'">Add New Record</button>
-    {% endif %}
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <span class="title">TRADE DETAILS</span>
+
+        <!-- Add Button -->
+        {% if is_admin %}
+            <button class="add-record" onclick="window.location.href='/trade/add'">Add New Record</button>
+        {% endif %}
+    </div>
+
+
     <!-- Filtering -->
     <form method="GET" action="/trade/search">
         <label for="country_name">Search by Country: </label>
@@ -25,7 +31,7 @@
             <option value="Balance imports/exports">Balance imports/exports</option>
         </select>
         
-        <button type="submit">Search</button>
+        <button type="submit" class="search">Search</button>
     </form>
     
     <table border="1">
@@ -50,19 +56,22 @@
             <td>{{ detail.unit }}</td>
             <td>{{ detail.record_year }}</td>
             <td>{{ detail.source }}</td>
+
             {% if is_admin %}
-            <td>
+            <td class="actions">
                 <!-- Edit Button -->
-                <button onclick="window.location.href='/trade/edit/{{ detail.id }}'">Edit</button>
+                <button class="edit" onclick="window.location.href='/trade/edit/{{ detail.id }}'">Edit</button>
+
                 <!-- Delete Button -->
                 <form action="/trade/delete/{{ detail.id }}" method="POST" style="display:inline;">
-                    <button type="submit">Delete</button>
+                    <button type="submit" class="delete">Delete</button>
                 </form>
             </td>
             {% endif %}
         </tr>
         {% endfor %}
     </table>
+
     <!-- Previous Button -->
     <form action="/trade/previous" method="POST">
         <button type="submit"> < </button>

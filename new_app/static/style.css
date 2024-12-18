@@ -1,0 +1,252 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #D4DFE8;
+    color: #333;
+}
+
+.navbar {
+    background-color: #5b92e5; /* Górny pasek w kolorze niebieskim */
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between; /* Ustawia przestrzeń między tytułem a przyciskiem */
+    align-items: center;
+    font-size: 1.5em;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative; /* Dodajemy, by mieć punkt odniesienia dla przycisku */
+    width: 100%; /* Dodajemy, żeby pasek wypełniał całą szerokość */
+}
+
+.navbar .title {
+    position: absolute; /* Używamy absolutnego pozycjonowania */
+    left: 50%; /* Pozycjonowanie na środku */
+    transform: translateX(-50%); /* Przemieszczamy o połowę szerokości tytułu */
+    text-align: center; /* Wyśrodkowuje tekst */
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.navbar .add-record {
+    background-color: #FFD700;
+    color: black;
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-left: auto; /* Przesuwa przycisk na prawą stronę */
+}
+
+
+
+
+
+/* Button Styles */
+button {
+    background-color: transparent; /* Brak tła, żeby nie dziedziczyć */
+    border: none;
+    padding: 12px 25px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px 5px;
+    border-radius: 50px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #3f4d63;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(2px);
+}
+
+/* Add Record Button */
+button.add-record {
+    background-color: #FFD700; /* Żółty kolor */
+    color: black;
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 10px 20px;
+}
+
+button.add-record:hover {
+    background-color: #FFC300;
+}
+
+/* Search Button */
+button.search {
+    background-color: #5b92e5; /* Niebieskie tło */
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button.search:hover {
+    background-color: #3f4d63; /* Ciemniejszy niebieski na hover */
+    transform: translateY(-2px);
+}
+
+button.search:active {
+    transform: translateY(2px);
+}
+
+/* Edit Button */
+button.edit {
+    background-color: #5b92e5; /* Niebieski */
+    color: white;
+    padding: 8px 16px;
+    border-radius: 50px;
+}
+
+button.edit:hover {
+    background-color: #3f4d63; /* Ciemniejszy niebieski */
+}
+
+/* Delete Button */
+button.delete {
+    background-color: #e74c3c; /* Czerwony kolor tła */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button.delete:hover {
+    background-color: #c0392b; /* Ciemniejszy czerwony na hover */
+    transform: translateY(-2px);
+}
+
+button.delete:active {
+    transform: translateY(2px);
+}
+
+
+/* Form Styles */
+form {
+    margin: 30px auto;
+    padding: 20px;
+    background-color: transparent;
+    border-radius: 12px;
+    box-shadow: none;
+    width: 80%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+form label {
+    font-size: 18px;
+    margin-right: 10px;
+    color: #5b92e5;
+}
+
+form input, form select {
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    font-size: 16px;
+}
+
+td.actions {
+    text-align: center; /* Wyśrodkowanie przycisków w komórce */
+}
+
+th {
+    background-color: #5b92e5;
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #EBEBE2;
+}
+
+tr:nth-child(odd) {
+    background-color: #FFFFFF;
+}
+
+/* Table Row Hover Effect */
+tr:hover {
+    background-color: #E6C8AB;
+    cursor: pointer;
+}
+
+/* Link Styles */
+a {
+    display: inline-block;
+    margin-top: 30px;
+    text-decoration: none;
+    color: #7288C6;
+    font-weight: bold;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #3f4d63;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    body {
+        margin: 10px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    table, form {
+        width: 100%;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    /* Reduce form padding on smaller screens */
+    form {
+        padding: 15px;
+    }
+
+    /* Adjust input field size on smaller screens */
+    form input, form select {
+        padding: 8px;
+        font-size: 14px;
+    }
+}

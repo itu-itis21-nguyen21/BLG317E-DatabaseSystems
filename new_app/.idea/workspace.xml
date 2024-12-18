@@ -1,17 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="dc5c0763-38f7-42fc-a5ef-97d3f7ace7b3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/static/main.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/BLG317E-DatabaseSystems.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/BLG317E-DatabaseSystems.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/database.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../test_template/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test_template/database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/carbondioxide.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/carbondioxide.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/exchangeRates.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/exchangeRates.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/health.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/health.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/internet.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/internet.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/threatenedSpecies.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/threatenedSpecies.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/tourism.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tourism.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/trade.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/trade.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform)); sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo, NoAppException&#10;for module in [&quot;main.py&quot;, &quot;wsgi.py&quot;, &quot;app.py&quot;]:&#10;    try: locals().update(ScriptInfo(app_import_path=module, create_app=None).load_app().make_shell_context()); print(&quot;\nFlask App: %s&quot; % app.import_name); break&#10;    except NoAppException: pass">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform)); sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo, NoAppException&#10;for module in [&quot;main.py&quot;, &quot;wsgi.py&quot;, &quot;app.py&quot;]:&#10;    try: locals().update(ScriptInfo(app_import_path=module, create_app=None).load_app().make_shell_context()); print(&quot;\nFlask App: %s&quot; % app.import_name); break&#10;    except NoAppException: pass" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -28,7 +57,12 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/weronikajopek/Desktop/BLG317E-DatabaseSystems/new_app&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -74,6 +108,13 @@
       <option name="presentableId" value="Default" />
       <updated>1733673110446</updated>
       <workItem from="1733673113490" duration="246000" />
+      <workItem from="1734342074309" duration="10000" />
+      <workItem from="1734343203760" duration="543000" />
+      <workItem from="1734343855619" duration="9000" />
+      <workItem from="1734344721783" duration="3176000" />
+      <workItem from="1734466008310" duration="98000" />
+      <workItem from="1734466204066" duration="337000" />
+      <workItem from="1734507127815" duration="5768000" />
     </task>
     <servers />
   </component>
@@ -81,6 +122,6 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/new_app$new_app.coverage" NAME="new_app Coverage Results" MODIFIED="1733673136183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/new_app$new_app.coverage" NAME="new_app Coverage Results" MODIFIED="1734466335711" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>
