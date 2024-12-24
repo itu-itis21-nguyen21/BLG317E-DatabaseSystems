@@ -1,28 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Trade Details</title>
-</head>
-<body>
-    <!-- Navigation Bar -->
-    <div class="navbar">
-        <span class="title">TRADE DETAILS</span>
+{% extends 'base.html' %}
 
-        <!-- Add Button -->
-        {% if is_admin %}
-            <button class="add-record" onclick="window.location.href='/trade/add'">Add New Record</button>
-        {% endif %}
-    </div>
+{% block title %}Trade Details{% endblock %}
 
+{% block page_title %}TRADE DETAILS{% endblock %}
 
+{% block add_button_url %}/trade/add{% endblock %}
+
+{% block content %}
     <!-- Filtering -->
     <form method="GET" action="/trade/search">
         <label for="country_name">Search by Country: </label>
         <input type="text" name="country_name" id="country_name" placeholder="Enter country name">
-        
+
         <label for="series_name">Search by Series: </label>
         <select name="series_name" id="series_name">
             <option value="">-- Select Series --</option>
@@ -30,10 +19,10 @@
             <option value="Exports FOB">Exports FOB</option>
             <option value="Balance imports/exports">Balance imports/exports</option>
         </select>
-        
+
         <button type="submit" class="search">Search</button>
     </form>
-    
+
     <table border="1">
         <tr>
             <th>ID</th>
@@ -59,10 +48,7 @@
 
             {% if is_admin %}
             <td class="actions">
-                <!-- Edit Button -->
                 <button class="edit" onclick="window.location.href='/trade/edit/{{ detail.id }}'">Edit</button>
-
-                <!-- Delete Button -->
                 <form action="/trade/delete/{{ detail.id }}" method="POST" style="display:inline;">
                     <button type="submit" class="delete">Delete</button>
                 </form>
@@ -71,15 +57,15 @@
         </tr>
         {% endfor %}
     </table>
+{% endblock %}
 
-    <!-- Previous Button -->
-    <form action="/trade/previous" method="POST">
-        <button type="submit"> < </button>
-    </form>
-    <!-- Next Button -->
-    <form action="/trade/next" method="POST">
-        <button type="submit"> > </button>
-    </form>
-    <a href="/">Back to Main Page</a>
-</body>
-</html>
+{% block pagination %}
+    <div class="pagination">
+        <form action="/trade/previous" method="POST">
+            <button type="submit">Previous Page</button>
+        </form>
+        <form action="/trade/next" method="POST">
+            <button type="submit">Next Page</button>
+        </form>
+    </div>
+{% endblock %}

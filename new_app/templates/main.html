@@ -7,16 +7,24 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 </head>
 <body>
-    <h1>Welcome to the United Nations Stats</h1>
-    <div class="button-container">
-        <a href="/trade" class="button">Trade</a>
-        <a href="/aid" class="button">Aid</a>
-        <a href="/exchangeRates" class="button">Exchange Rates</a>
-        <a href="/tourism" class="button">Tourism</a>
-        <a href="/carbondioxide" class="button">CO2</a>
-        <a href="/threatenedSpecies" class="button">Species</a>
-        <a href="/internet" class="button">Internet Usage</a>
-        <a href="/health" class="button">Health Expenditure</a>
+    <h1>Welcome to the United Nations Statistics</h1>
+    <div class="main-box">
+        <div class="text-container">
+            <h2>Visit our tables</h2>
+            <ul>
+                <li><a href="/trade">Trade</a></li>
+                <li><a href="/aid">Aid</a></li>
+                <li><a href="/exchangeRates">Exchange Rates</a></li>
+                <li><a href="/tourism">Tourism</a></li>
+                <li><a href="/carbondioxide">CO2</a></li>
+                <li><a href="/threatenedSpecies">Species</a></li>
+                <li><a href="/internet">Internet Usage</a></li>
+                <li><a href="/health">Health Expenditure</a></li>
+            </ul>
+        </div>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='photo.jpeg') }}" alt="UN Statistics">
+        </div>
     </div>
 </body>
 </html>

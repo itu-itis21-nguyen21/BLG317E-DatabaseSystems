@@ -1,37 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% extends 'base.html' %}
 
-    <title>Tourism</title>
-</head>
-<body>
-    <!-- Navigation Bar -->
-    <div class="navbar">
-        <span class="title">TOURISM DETAILS</span>
+{% block title %}Tourism Details{% endblock %}
 
-        {% if is_admin %}
-            <button class="add-record" onclick="window.location.href='/tourism/add'">Add New Record</button>
-        {% endif %}
-    </div>
+{% block page_title %}TOURISM DETAILS{% endblock %}
 
+{% block add_button_url %}/tourism/add{% endblock %}
+
+{% block content %}
     <!-- Filtering -->
     <form method="GET" action="/tourism/search">
         <label for="country_name">Search by Country: </label>
         <input type="text" name="country_name" id="country_name" placeholder="Enter country name">
-        
+
         <label for="series_name">Search by Series: </label>
         <select name="series_name" id="series_name">
             <option value="">-- Select Series --</option>
             <option value="Tourism expenditure">Tourism expenditure</option>
             <option value="Tourist/visitor arrivals">Tourist/visitor arrivals</option>
         </select>
-        
+
         <button type="submit" class="search">Search</button>
     </form>
-    
+
     <table border="1">
         <tr>
             <th>ID</th>
@@ -69,6 +59,15 @@
         </tr>
         {% endfor %}
     </table>
-    <a href="/">Back to Main Page</a>
-</body>
-</html>
+{% endblock %}
+
+{% block pagination %}
+    <div class="pagination">
+        <form action="/tourism/previous" method="POST">
+            <button type="submit">Previous Page</button>
+        </form>
+        <form action="/tourism/next" method="POST">
+            <button type="submit">Next Page</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,23 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Internet Usage Details</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-    <!-- Navigation Bar -->
-    <div class="navbar">
-        <span class="title">Internet Usage Details</span>
+{% block title %}Internet Usage Details{% endblock %}
 
-        {% if is_admin %}
-            <button class="add-record" onclick="window.location.href='/internet/add'">Add New Record</button>
-        {% endif %}
-    </div>
+{% block page_title %}Internet Usage Details{% endblock %}
 
+{% block add_button_url %}/internet/add{% endblock %}
 
+{% block content %}
     <!-- Filtering -->
     <form method="GET" action="/internet/search">
         <label for="country_name">Search by Country: </label>
@@ -30,7 +19,7 @@
         </select>
         
         <button class="search" type="submit">Search</button>
-    </form>    
+    </form>
 
     <table border="1">
         <tr>
@@ -42,7 +31,7 @@
             <th>Record Year</th>
             <th>Source</th>
             {% if is_admin %}
-            <th></th>
+            <th>Actions</th>
             {% endif %}
         </tr>
         {% for detail in details %}
@@ -54,19 +43,30 @@
             <td>{{ detail.unit }}</td>
             <td>{{ detail.record_year }}</td>
             <td>{{ detail.source }}</td>
+
             {% if is_admin %}
             <td class="actions">
                 <!-- Edit Button -->
                 <button class="edit" onclick="window.location.href='/internet/edit/{{ detail.id }}'">Edit</button>
+
                 <!-- Delete Button -->
                 <form action="/internet/delete/{{ detail.id }}" method="POST" style="display:inline;">
-                    <button class="delete" type="submit">Delete</button>
+                    <button type="submit" class="delete">Delete</button>
                 </form>
             </td>
             {% endif %}
         </tr>
         {% endfor %}
     </table>
-    <a href="/">Back to Main Page</a>
-</body>
-</html>
+{% endblock %}
+
+{% block pagination %}
+    <div class="pagination">
+        <form action="/internet/previous" method="POST">
+            <button type="submit">Previous Page</button>
+        </form>
+        <form action="/internet/next" method="POST">
+            <button type="submit">Next Page</button>
+        </form>
+    </div>
+{% endblock %}

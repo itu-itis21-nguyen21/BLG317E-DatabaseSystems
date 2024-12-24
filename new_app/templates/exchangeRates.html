@@ -1,24 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Exchange Rates Details</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-    <div class="navbar">
-        <span class="title">EXCHANGE RATES DETAILS</span>
+{% block title %}Exchange Rates Details{% endblock %}
 
-        {% if is_admin %}
-            <button class="add-record" onclick="window.location.href='/exchangeRates/add'">Add New Record</button>
-        {% endif %}
-    </div>
+{% block page_title %}Exchange Rates Details{% endblock %}
 
+{% block add_button_url %}/exchangeRates/add{% endblock %}
 
-
-
+{% block content %}
     <!-- Filtering -->
     <form method="GET" action="/exchangeRates/search">
         <label for="country_name">Search by Country: </label>
@@ -45,7 +33,7 @@
             <th>Record Year</th>
             <th>Source</th>
             {% if is_admin %}
-            <th></th>
+            <th>Actions</th>
             {% endif %}
         </tr>
         {% for detail in details %}
@@ -58,11 +46,12 @@
             <td>{{ detail.unit }}</td>
             <td>{{ detail.record_year }}</td>
             <td>{{ detail.source }}</td>
-            {% if is_admin %}
 
+            {% if is_admin %}
             <td class="actions">
                 <!-- Edit Button -->
                 <button class="edit" onclick="window.location.href='/exchangeRates/edit/{{ detail.id }}'">Edit</button>
+
                 <!-- Delete Button -->
                 <form action="/exchangeRates/delete/{{ detail.id }}" method="POST" style="display:inline;">
                     <button type="submit" class="delete">Delete</button>
@@ -72,14 +61,15 @@
         </tr>
         {% endfor %}
     </table>
-    <!-- Previous Button -->
-    <form action="/exchangeRates/previous" method="POST">
-        <button type="submit"> < </button>
-    </form>
-    <!-- Next Button -->
-    <form action="/exchangeRates/next" method="POST">
-        <button type="submit"> > </button>
-    </form>
-    <a href="/">Back to Main Page</a>
-</body>
-</html>
+{% endblock %}
+
+{% block pagination %}
+    <div class="pagination">
+        <form action="/exchangeRates/previous" method="POST">
+            <button type="submit">Previous Page</button>
+        </form>
+        <form action="/exchangeRates/next" method="POST">
+            <button type="submit">Next Page</button>
+        </form>
+    </div>
+{% endblock %}
