@@ -216,7 +216,7 @@ def next_record():
     
     # Update the session page count
     session['current_page'] = current_page
-    return render_template('aid.html', details=results)
+    return render_template('aid.html', details=results, is_admin=(current_user.id == "admin"))
 
 
 @aid_bp.route('/aid/previous', methods=['POST'])
@@ -251,4 +251,4 @@ def previous_record():
 
     # Update the session page count
     session['current_page'] = current_page
-    return render_template('aid.html', details=results)
+    return render_template('aid.html', details=results, is_admin=(current_user.id == "admin"))

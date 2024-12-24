@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Aid Details</title>
 </head>
 <body>
-    <h1>Aid Details</h1>
-    
-    <!-- Add Button -->
-    {% if is_admin %}
-    <button onclick="window.location.href='/aid/add'">Add New Record</button>
-    {% endif %}
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <span class="title">AID DETAILS</span>
+
+        <!-- Add Button -->
+        {% if is_admin %}
+            <button class="add-record" onclick="window.location.href='/aid/add'">Add New Record</button>
+        {% endif %}
+    </div>
     <!-- Filtering -->
     <form method="GET" action="/aid/search">
         <label for="country_name">Search by Country: </label>
