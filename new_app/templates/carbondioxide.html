@@ -1,23 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>CO2</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-    <!-- Navigation Bar -->
-    <div class="navbar">
-        <span class="title">CO2 DETAILS</span>
+{% block title %}CO2 Details{% endblock %}
 
-        {% if is_admin %}
-            <button class="add-record" onclick="window.location.href='/carbondioxide/add'">Add New Record</button>
-        {% endif %}
-    </div>
+{% block page_title %}CO2 DETAILS{% endblock %}
 
+{% block add_button_url %}/carbondioxide/add{% endblock %}
 
+{% block content %}
     <!-- Filtering -->
     <form method="GET" action="/carbondioxide/search">
         <label for="country_name">Search by Country: </label>
@@ -43,7 +32,7 @@
             <th>Record Year</th>
             <th>Source</th>
             {% if is_admin %}
-            <th></th>
+            <th>Actions</th>
             {% endif %}
         </tr>
         {% for detail in details %}
@@ -58,7 +47,6 @@
 
             {% if is_admin %}
             <td class="actions">
-
                 <!-- Edit Button -->
                 <button class="edit" onclick="window.location.href='/carbondioxide/edit/{{ detail.id }}'">Edit</button>
 
@@ -66,15 +54,20 @@
                 <form action="/carbondioxide/delete/{{ detail.id }}" method="POST" style="display:inline;">
                     <button type="submit" class="delete">Delete</button>
                 </form>
-
             </td>
             {% endif %}
-
         </tr>
         {% endfor %}
-
     </table>
+{% endblock %}
 
-    <a href="/">Back to Main Page</a>
-</body>
-</html>
+{% block pagination %}
+    <div class="pagination">
+        <form action="/carbondioxide/previous" method="POST">
+            <button type="submit">Previous Page</button>
+        </form>
+        <form action="/carbondioxide/next" method="POST">
+            <button type="submit">Next Page</button>
+        </form>
+    </div>
+{% endblock %}

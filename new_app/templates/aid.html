@@ -1,26 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Aid Details</title>
-</head>
-<body>
-    <!-- Navigation Bar -->
-    <div class="navbar">
-        <span class="title">AID DETAILS</span>
+{% extends 'base.html' %}
 
-        <!-- Add Button -->
-        {% if is_admin %}
-            <button class="add-record" onclick="window.location.href='/aid/add'">Add New Record</button>
-        {% endif %}
-    </div>
-    <!-- Filtering -->
+{% block title %}Aid Details{% endblock %}
+
+{% block page_title %}Aid Details{% endblock %}
+
+{% block add_button_url %}/aid/add{% endblock %}
+
+{% block content %}
+    <!-- Filtering Form -->
     <form method="GET" action="/aid/search">
         <label for="country_name">Search by Country: </label>
         <input type="text" name="country_name" id="country_name" placeholder="Enter country name">
-        
+
         <label for="series_name">Search by Series: </label>
         <select name="series_name" id="series_name">
             <option value="">-- Select Series --</option>
@@ -28,10 +19,11 @@
             <option value="Net official development assistance received: Multilateral">Net official development assistance received: Multilateral</option>
             <option value="Net official development assistance received: Total">Net official development assistance received: Total</option>
         </select>
-        
-        <button type="submit">Search</button>
+
+        <button class="search" type="submit">Search</button>
     </form>
 
+    <!-- Aid Details Table -->
     <table border="1">
         <tr>
             <th>ID</th>
@@ -42,7 +34,7 @@
             <th>Record Year</th>
             <th>Source</th>
             {% if is_admin %}
-            <th></th>
+            <th>Actions</th>
             {% endif %}
         </tr>
         {% for detail in details %}
@@ -54,28 +46,32 @@
             <td>{{ detail.unit }}</td>
             <td>{{ detail.record_year }}</td>
             <td>{{ detail.source }}</td>
+
             {% if is_admin %}
-            <td>
+            <td class="actions">
                 <!-- Edit Button -->
-                <button onclick="window.location.href='/aid/edit/{{ detail.id }}'">Edit</button>
+                <button class="edit" onclick="window.location.href='/aid/edit/{{ detail.id }}'">Edit</button>
+
                 <!-- Delete Button -->
                 <form action="/aid/delete/{{ detail.id }}" method="POST" style="display:inline;">
-                    <button type="submit">Delete</button>
+                    <button type="submit" class="delete">Delete</button>
                 </form>
             </td>
             {% endif %}
         </tr>
         {% endfor %}
     </table>
+{% endblock %}
 
-    <!-- Previous Button -->
-    <form action="/aid/previous" method="POST">
-        <button type="submit"> < </button>
-    </form>
-    <!-- Next Button -->
-    <form action="/aid/next" method="POST">
-        <button type="submit"> > </button>
-    </form>
-    <a href="/">Back to Main Page</a>
-</body>
-</html>
+{% block pagination %}
+    <div class="pagination">
+        <!-- Previous Button -->
+        <form action="/aid/previous" method="POST">
+            <button type="submit">Previous Page</button>
+        </form>
+        <!-- Next Button -->
+        <form action="/aid/next" method="POST">
+            <button type="submit">Next Page</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,22 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Health Expenditure Details</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-    <!-- Navigation Bar -->
-    <div class="navbar">
-        <span class="title">Health Expenditure Details</span>
+{% block title %}Health Expenditure Details{% endblock %}
 
-        {% if is_admin %}
-            <button class="add-record" onclick="window.location.href='/health/add'">Add New Record</button>
-        {% endif %}
-    </div>
+{% block page_title %}Health Expenditure Details{% endblock %}
 
+{% block add_button_url %}/health/add{% endblock %}
+
+{% block content %}
     <!-- Filtering -->
     <form method="GET" action="/health/search">
         <label for="country_name">Search by Country: </label>
@@ -42,7 +32,7 @@
             <th>Record Year</th>
             <th>Source</th>
             {% if is_admin %}
-            <th></th>
+            <th>Actions</th>
             {% endif %}
         </tr>
         {% for detail in details %}
@@ -59,15 +49,25 @@
             <td class="actions">
                 <!-- Edit Button -->
                 <button class="edit" onclick="window.location.href='/health/edit/{{ detail.id }}'">Edit</button>
+
                 <!-- Delete Button -->
                 <form action="/health/delete/{{ detail.id }}" method="POST" style="display:inline;">
-                    <button class="delete" type="submit">Delete</button>
+                    <button type="submit" class="delete">Delete</button>
                 </form>
             </td>
             {% endif %}
         </tr>
         {% endfor %}
     </table>
-    <a href="/">Back to Main Page</a>
-</body>
-</html>
+{% endblock %}
+
+{% block pagination %}
+    <div class="pagination">
+        <form action="/health/previous" method="POST">
+            <button type="submit">Previous Page</button>
+        </form>
+        <form action="/health/next" method="POST">
+            <button type="submit">Next Page</button>
+        </form>
+    </div>
+{% endblock %}
