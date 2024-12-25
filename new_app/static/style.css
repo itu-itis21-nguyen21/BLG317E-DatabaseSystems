@@ -15,11 +15,12 @@ body {
     color: white;
     padding: 10px 20px;
     display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     font-size: 1.5em;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    position: relative;
     width: 100%;
     box-sizing: border-box;
 }
@@ -27,12 +28,13 @@ body {
 /* Logo Styles */
 .navbar .logo {
     width: 80px;
+    min-width: 80px;
     height: auto;
     margin-right: 20px;
     background-color: white;
     padding: 10px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Back to Main Page Link Styles */
@@ -43,11 +45,12 @@ body {
     border-radius: 12px;
     padding: 10px 20px;
     text-decoration: none;
+    min-width: 120px;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 40px;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: auto;
 }
 
 /* Title */
@@ -68,6 +71,7 @@ body {
     border-radius: 12px;
     padding: 10px 20px;
     border: none;
+    min-width: 120px;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
@@ -101,7 +105,7 @@ button {
 /* Button Hover Effects */
 button:hover {
     background-color: #3f4d63;
-    transform: translateY(-2px);
+    transform: translateY(-1px);
 }
 
 button:active {
@@ -178,7 +182,7 @@ button.delete:active {
 
 /* Form Styles */
 form {
-    margin: 30px auto;
+    margin: 20px auto;
     padding: 20px;
     background-color: transparent;
     border-radius: 12px;
@@ -188,7 +192,7 @@ form {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
     flex-wrap: wrap;
 }
 
@@ -201,8 +205,8 @@ form label {
 }
 
 form input, form select {
-    padding: 8px;
-    margin: 0;
+    padding: 12px;
+    margin-bottom: 10px;
     flex: 3;
     min-width: 200px;
     border-radius: 8px;
@@ -238,7 +242,7 @@ th, td {
 }
 
 th {
-    padding: 8px;
+    padding: 10px;
     background-color: #5b92e5;
     color: white;
     text-transform: uppercase;
@@ -247,7 +251,7 @@ th {
 }
 
 td {
-    padding: 2px;
+    padding: 6px;
     text-align: center;
     font-size: 12px;
 }
@@ -291,26 +295,35 @@ a:hover {
 /* Pagination Styles */
 .pagination {
     display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin: 20px 0;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
 }
 
-/* Przyciski w paginacji */
+.pagination .prev-container, .pagination .next-container {
+    display: inline-flex;
+    margin: 0;
+}
+
+/* Pagination Button */
 .pagination button {
     background-color: #5b92e5;
     color: white;
-    padding: 8px 15px;
     border-radius: 50px;
     border: none;
     cursor: pointer;
     font-size: 14px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    padding: 8px 16px;
 }
 
-/* Hover efekt */
 .pagination button:hover {
     background-color: #3f4d63;
+    transform: translateY(-2px);
+}
+
+.pagination button:active {
+    transform: translateY(2px);
 }
 
 /* Responsive Styles */
@@ -320,6 +333,13 @@ a:hover {
     }
     h1 {
         font-size: 2em;
+    }
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+    }
+    .back-to-main {
+        margin: 10px 0;
     }
     table, form {
         width: 100%;

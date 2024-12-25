@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: Verdana, sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -34,16 +34,16 @@ h1 {
 
 .text-container {
     flex: 1;
-    padding-right: 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 40px;
 }
 
 .text-container h2 {
     font-size: 3rem;
     color: #5b92e5;
-    margin-bottom: 20px;
+    margin: 10px;
 }
 
 .text-container ul {
@@ -69,6 +69,7 @@ h1 {
 .image-container {
     flex: 1;
     max-width: 600px;
+    margin-right: 40px;
 }
 
 .image-container img {
