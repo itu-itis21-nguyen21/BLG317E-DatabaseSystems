@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect
+from flask import Blueprint, render_template, request, redirect, session
 from flask_login import login_required, current_user
 from database import connection
 
@@ -21,7 +21,6 @@ def get_health_details():
         JOIN countries ON health.countryCode = countries.countryCode
         JOIN series ON health.seriesID = series.seriesID
         JOIN sources ON health.sourceID = sources.sourceID
-
         ORDER BY id ASC
         LIMIT 20;
 
@@ -188,4 +187,72 @@ def search_by_country_and_series():
     cursor.close()
     
     # Render the filtered results
+    return render_template('health.html', details=results)
+
+
+@health_bp.route('/health/next', methods=['POST'])
+def next_record():
+    cursor = connection.cursor(dictionary=True)
+    # Example of incrementing the offset (assuming you store current page in session)
+    current_page = session.get('current_page', 1) + 1
+    offset = (current_page - 1) * 20
+    sql = f"""
+        SELECT
+            health.id AS id,
+            countries.country AS country_name,
+            series.series AS series,
+            health.val AS value,
+            series.unit AS unit,
+            health.recordYear AS record_year,
+            sources.source AS source
+
+        FROM health 
+        JOIN countries ON health.countryCode = countries.countryCode
+        JOIN series ON health.seriesID = series.seriesID
+        JOIN sources ON health.sourceID = sources.sourceID
+        ORDER BY id ASC
+        LIMIT 20 OFFSET {offset};
+    """
+    cursor.execute(sql)
+    results = cursor.fetchall()
+    cursor.close()
+
+    # Update the session page count
+    session['current_page'] = current_page
+    return render_template('health.html', details=results)
+
+
+@health_bp.route('/health/previous', methods=['POST'])
+def previous_record():
+    cursor = connection.cursor(dictionary=True)
+    current_page = session.get('current_page', 1)
+
+    # Ensure we don't go below page 1
+    if current_page > 1:
+        current_page -= 1
+
+    offset = (current_page - 1) * 20
+    sql = f"""
+        SELECT
+            health.id AS id,
+            countries.country AS country_name,
+            series.series AS series,
+            health.val AS value,
+            series.unit AS unit,
+            health.recordYear AS record_year,
+            sources.source AS source
+
+        FROM health 
+        JOIN countries ON health.countryCode = countries.countryCode
+        JOIN series ON health.seriesID = series.seriesID
+        JOIN sources ON health.sourceID = sources.sourceID
+        ORDER BY id ASC
+        LIMIT 20 OFFSET {offset};
+    """
+    cursor.execute(sql)
+    results = cursor.fetchall()
+    cursor.close()
+
+    # Update the session page count
+    session['current_page'] = current_page
     return render_template('health.html', details=results)

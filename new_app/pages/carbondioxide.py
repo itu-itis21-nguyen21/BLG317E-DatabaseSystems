@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect
+from flask import Blueprint, render_template, request, redirect, session
 from flask_login import login_required, current_user
 from database import connection
 
@@ -21,7 +21,6 @@ def get_carbondioxide_details():
         JOIN countries ON carbondioxide.countryCode = countries.countryCode
         JOIN series ON carbondioxide.seriesID = series.seriesID
         JOIN sources ON carbondioxide.sourceID = sources.sourceID
-
         ORDER BY id ASC
         LIMIT 20;
 
@@ -191,4 +190,72 @@ def search_by_country_and_series():
     cursor.close()
     
     # Render the filtered results
+    return render_template('carbondioxide.html', details=results)
+
+
+@carbondioxide_bp.route('/carbondioxide/next', methods=['POST'])
+def next_record():
+    cursor = connection.cursor(dictionary=True)
+    # Example of incrementing the offset (assuming you store current page in session)
+    current_page = session.get('current_page', 1) + 1
+    offset = (current_page - 1) * 20
+    sql = f"""
+        SELECT
+            carbondioxide.id AS id,
+            countries.country AS country_name,
+            series.series AS series,
+            carbondioxide.val AS value,
+            series.unit AS unit,
+            carbondioxide.recordYear AS record_year,
+            sources.source AS source
+
+        FROM carbondioxide 
+        JOIN countries ON carbondioxide.countryCode = countries.countryCode
+        JOIN series ON carbondioxide.seriesID = series.seriesID
+        JOIN sources ON carbondioxide.sourceID = sources.sourceID
+        ORDER BY id ASC
+        LIMIT 20 OFFSET {offset};
+    """
+    cursor.execute(sql)
+    results = cursor.fetchall()
+    cursor.close()
+
+    # Update the session page count
+    session['current_page'] = current_page
+    return render_template('carbondioxide.html', details=results)
+
+
+@carbondioxide_bp.route('/carbondioxide/previous', methods=['POST'])
+def previous_record():
+    cursor = connection.cursor(dictionary=True)
+    current_page = session.get('current_page', 1)
+
+    # Ensure we don't go below page 1
+    if current_page > 1:
+        current_page -= 1
+
+    offset = (current_page - 1) * 20
+    sql = f"""
+        SELECT
+            carbondioxide.id AS id,
+            countries.country AS country_name,
+            series.series AS series,
+            carbondioxide.val AS value,
+            series.unit AS unit,
+            carbondioxide.recordYear AS record_year,
+            sources.source AS source
+
+        FROM carbondioxide 
+        JOIN countries ON carbondioxide.countryCode = countries.countryCode
+        JOIN series ON carbondioxide.seriesID = series.seriesID
+        JOIN sources ON carbondioxide.sourceID = sources.sourceID
+        ORDER BY id ASC
+        LIMIT 20 OFFSET {offset};
+    """
+    cursor.execute(sql)
+    results = cursor.fetchall()
+    cursor.close()
+
+    # Update the session page count
+    session['current_page'] = current_page
     return render_template('carbondioxide.html', details=results)

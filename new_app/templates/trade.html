@@ -24,38 +24,42 @@
     </form>
 
     <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Country Name</th>
-            <th>Series</th>
-            <th>Value</th>
-            <th>Unit</th>
-            <th>Record Year</th>
-            <th>Source</th>
-            {% if is_admin %}
-            <th></th>
-            {% endif %}
-        </tr>
-        {% for detail in details %}
-        <tr>
-            <td>{{ detail.id }}</td>
-            <td>{{ detail.country_name }}</td>
-            <td>{{ detail.series }}</td>
-            <td>{{ detail.value }}</td>
-            <td>{{ detail.unit }}</td>
-            <td>{{ detail.record_year }}</td>
-            <td>{{ detail.source }}</td>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Country Name</th>
+                <th>Series</th>
+                <th>Value</th>
+                <th>Unit</th>
+                <th>Record Year</th>
+                <th>Source</th>
+                {% if is_admin %}
+                    <th></th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for detail in details %}
+            <tr>
+                <td>{{ detail.id }}</td>
+                <td>{{ detail.country_name }}</td>
+                <td>{{ detail.series }}</td>
+                <td>{{ detail.value }}</td>
+                <td>{{ detail.unit }}</td>
+                <td>{{ detail.record_year }}</td>
+                <td>{{ detail.source }}</td>
 
-            {% if is_admin %}
-            <td class="actions">
-                <button class="edit" onclick="window.location.href='/trade/edit/{{ detail.id }}'">Edit</button>
-                <form action="/trade/delete/{{ detail.id }}" method="POST" style="display:inline;">
-                    <button type="submit" class="delete">Delete</button>
-                </form>
-            </td>
-            {% endif %}
-        </tr>
-        {% endfor %}
+                {% if is_admin %}
+                <td class="actions">
+                    <button class="edit" onclick="window.location.href='/trade/edit/{{ detail.id }}'">Edit</button>
+                    <form action="/trade/delete/{{ detail.id }}" method="POST" style="display:inline;">
+                        <button type="submit" class="delete">Delete</button>
+                    </form>
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
 {% endblock %}
 

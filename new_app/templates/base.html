@@ -29,14 +29,18 @@
     <!-- Pagination -->
     {% block pagination %}
     <div class="pagination">
-        <!-- Previous Button -->
-        <form action="/previous" method="POST">
-            <button type="submit">Previous Page</button>
-        </form>
-        <!-- Next Button -->
-        <form action="/next" method="POST">
-            <button type="submit">Next Page</button>
-        </form>
+        <!-- Previous Button in its own container -->
+        <div class="prev-container">
+            <form action="/previous" method="POST">
+                <button type="submit">Previous Page</button>
+            </form>
+        </div>
+        <!-- Next Button in its own container -->
+        <div class="next-container">
+            <form action="/next" method="POST">
+                <button type="submit">Next Page</button>
+            </form>
+        </div>
     </div>
     {% endblock %}
 </body>
