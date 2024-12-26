@@ -219,7 +219,7 @@ def next_record():
     
     # Update the session page count
     session['current_page'] = current_page
-    return render_template('trade.html', details=results)
+    return render_template('trade.html', details=results, is_admin=(current_user.id == "admin"))
 
 
 @trade_bp.route('/trade/previous', methods=['POST'])
@@ -254,4 +254,4 @@ def previous_record():
 
     # Update the session page count
     session['current_page'] = current_page
-    return render_template('trade.html', details=results)
+    return render_template('trade.html', details=results, is_admin=(current_user.id == "admin"))

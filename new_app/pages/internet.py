@@ -219,7 +219,7 @@ def next_record():
 
     # Update the session page count
     session['current_page'] = current_page
-    return render_template('internet.html', details=results)
+    return render_template('internet.html', details=results, is_admin=(current_user.id == "admin"))
 
 
 @internet_bp.route('/internet/previous', methods=['POST'])
@@ -255,4 +255,4 @@ def previous_record():
 
     # Update the session page count
     session['current_page'] = current_page
-    return render_template('internet.html', details=results)
+    return render_template('internet.html', details=results, is_admin=(current_user.id == "admin"))

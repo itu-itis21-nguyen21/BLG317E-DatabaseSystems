@@ -6,103 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="dc5c0763-38f7-42fc-a5ef-97d3f7ace7b3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/msgpack/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/msgpack/exceptions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/msgpack/ext.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/msgpack/fallback.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/__main__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/_cell_widths.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/_emoji_codes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/_emoji_replace.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/_export_format.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/_extension.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/_fileno.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/_inspect.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/_log_render.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/_loop.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/_null_file.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/_palettes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/_pick.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/_ratio.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/_spinners.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/_stack.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/_timer.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/_win32_console.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/_windows.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/_windows_renderer.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/_wrap.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/abc.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/align.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/ansi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/bar.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/box.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/cells.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/color.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/color_triplet.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/columns.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/console.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/constrain.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/containers.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/control.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/default_styles.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/diagnose.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/emoji.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/errors.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/file_proxy.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/filesize.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/highlighter.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/json.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/jupyter.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/layout.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/live.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/live_render.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/logging.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/markup.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/measure.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/padding.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/pager.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/palette.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/panel.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/pretty.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/progress.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/progress_bar.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/prompt.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/protocol.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/py.typed" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/region.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/repr.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/rule.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/scope.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/screen.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/segment.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/spinner.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/status.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/style.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/styled.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/syntax.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/table.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/terminal_theme.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/text.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/theme.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/themes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/traceback.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/rich/tree.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/tomli/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/tomli/_parser.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/tomli/_re.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/tomli/_types.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/lib/python3.12/site-packages/pip/_vendor/tomli/py.typed" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/aid.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/aid.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/carbondioxide.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/carbondioxide.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/exchangeRates.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/exchangeRates.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/health.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/health.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/internet.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/internet.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/threatenedSpecies.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/threatenedSpecies.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/tourism.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tourism.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/trade.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/trade.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/trade.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/trade.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,22 +45,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.new_app.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "weronika-frontend",
-    "last_opened_file_path": "/Users/weronikajopek/Desktop/BLG317E-DatabaseSystems/new_app",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.new_app.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;weronika-frontend&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/weronikajopek/Desktop/BLG317E-DatabaseSystems/new_app&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="new_app" type="PythonConfigurationType" factoryName="Python">
       <module name="new_app" />
@@ -202,6 +113,8 @@
       <workItem from="1734966374780" duration="16429000" />
       <workItem from="1735046827224" duration="42000" />
       <workItem from="1735156485314" duration="7204000" />
+      <workItem from="1735167251538" duration="107000" />
+      <workItem from="1735201224034" duration="1842000" />
     </task>
     <servers />
   </component>

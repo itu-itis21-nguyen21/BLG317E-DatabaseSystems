@@ -221,7 +221,7 @@ def next_record():
     
     # Update the session page count
     session['current_page'] = current_page
-    return render_template('exchangeRates.html', details=results)
+    return render_template('exchangeRates.html', details=results, is_admin=(current_user.id == "admin"))
 
 
 @exchangeRates_bp.route('/exchangeRates/previous', methods=['POST'])
@@ -257,4 +257,4 @@ def previous_record():
 
     # Update the session page count
     session['current_page'] = current_page
-    return render_template('exchangeRates.html', details=results)
+    return render_template('exchangeRates.html', details=results, is_admin=(current_user.id == "admin"))
