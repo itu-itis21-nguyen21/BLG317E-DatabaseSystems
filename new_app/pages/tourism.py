@@ -198,7 +198,9 @@ def next_record():
     cursor = connection.cursor(dictionary=True)
     # Example of incrementing the offset (assuming you store current page in session)
     current_page = session.get('current_page', 1) + 1
+
     offset = (current_page - 1) * 20
+
     sql = f"""
         SELECT
             tourism.id AS id,
@@ -222,7 +224,7 @@ def next_record():
 
     # Update the session page count
     session['current_page'] = current_page
-    return render_template('tourism.html', details=results)
+    return render_template('tourism.html', details=results, is_admin=(current_user.id == "admin"))
 
 
 @tourism_bp.route('/tourism/previous', methods=['POST'])
@@ -258,4 +260,4 @@ def previous_record():
 
     # Update the session page count
     session['current_page'] = current_page
-    return render_template('tourism.html', details=results)
+    return render_template('tourism.html', details=results, is_admin=(current_user.id == "admin"))

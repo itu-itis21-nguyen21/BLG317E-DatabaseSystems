@@ -222,7 +222,7 @@ def next_record():
 
     # Update the session page count
     session['current_page'] = current_page
-    return render_template('carbondioxide.html', details=results)
+    return render_template('carbondioxide.html', details=results, is_admin=(current_user.id == "admin"))
 
 
 @carbondioxide_bp.route('/carbondioxide/previous', methods=['POST'])
@@ -258,4 +258,4 @@ def previous_record():
 
     # Update the session page count
     session['current_page'] = current_page
-    return render_template('carbondioxide.html', details=results)
+    return render_template('carbondioxide.html', details=results, is_admin=(current_user.id == "admin"))

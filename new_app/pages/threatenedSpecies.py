@@ -222,7 +222,7 @@ def next_record():
 
     # Update the session page count
     session['current_page'] = current_page
-    return render_template('threatenedSpecies.html', details=results)
+    return render_template('threatenedSpecies.html', details=results, is_admin=(current_user.id == "admin"))
 
 
 @threatenedSpecies_bp.route('/threatenedSpecies/previous', methods=['POST'])
@@ -258,4 +258,4 @@ def previous_record():
 
     # Update the session page count
     session['current_page'] = current_page
-    return render_template('threatenedSpecies.html', details=results)
+    return render_template('threatenedSpecies.html', details=results, is_admin=(current_user.id == "admin"))
