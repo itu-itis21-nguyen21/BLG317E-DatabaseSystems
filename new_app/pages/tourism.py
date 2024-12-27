@@ -97,7 +97,8 @@ def add_record():
 
     cursor.close()
 
-    return render_template('add.html', countries=countries, series=series, sources=sources)
+    referrer = request.referrer
+    return render_template('add.html', countries=countries, series=series, sources=sources, referrer=referrer)
 
 @tourism_bp.route('/tourism/edit/<int:record_id>', methods=['GET', 'POST'])
 @login_required
