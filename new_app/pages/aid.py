@@ -189,7 +189,7 @@ def search_by_country_and_series():
     cursor.close()
     
     # Render the filtered results
-    return render_template('aid.html', details=results)
+    return render_template('aid.html', details=results, is_admin=(current_user.id == "admin"))
 
 @aid_bp.route('/aid/next', methods=['POST'])
 def next_record():
