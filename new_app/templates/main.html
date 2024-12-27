@@ -7,16 +7,19 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 </head>
 <body>
+    <a href="/logout">
+        <img src="{{ url_for('static', filename='logout.svg') }}" alt="Logo">
+    </a>
     <h1>Welcome to the United Nations Statistics</h1>
     <div class="main-box">
         <div class="text-container">
-            <h2>Visit our tables</h2>
+            <h2>Visit our records</h2>
             <ul>
                 <li><a href="/trade">Trade</a></li>
-                <li><a href="/aid">Aid</a></li>
+                <li><a href="/aid">Financial Aid</a></li>
                 <li><a href="/exchangeRates">Exchange Rates</a></li>
                 <li><a href="/tourism">Tourism</a></li>
-                <li><a href="/carbondioxide">CO2</a></li>
+                <li><a href="/carbondioxide">CO2 Emissions</a></li>
                 <li><a href="/threatenedSpecies">Threatened Species</a></li>
                 <li><a href="/internet">Internet Usage</a></li>
                 <li><a href="/health">Health Expenditure</a></li>

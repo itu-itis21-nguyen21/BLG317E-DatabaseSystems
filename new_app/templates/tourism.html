@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
-{% block title %}Tourism Details{% endblock %}
+{% block title %}Tourism{% endblock %}
 
-{% block page_title %}TOURISM DETAILS{% endblock %}
+{% block page_title %}TOURISM RECORDS{% endblock %}
 
 {% block add_button_url %}/tourism/add{% endblock %}
 
@@ -63,11 +63,11 @@
 
 {% block pagination %}
     <div class="pagination">
-        <form action="/tourism/previous" method="POST">
-            <button type="submit">Previous Page</button>
+        <form action="/tourism/previous" method="POST" class="left-align">
+            <button type="submit">Previous</button>
         </form>
-        <form action="/tourism/next" method="POST">
-            <button type="submit">Next Page</button>
+        <form action="/tourism/next" method="POST" class="right-align">
+            <button type="submit">Next</button>
         </form>
     </div>
 {% endblock %}

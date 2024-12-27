@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
-{% block title %}Exchange Rates Details{% endblock %}
+{% block title %}Exchange Rates{% endblock %}
 
-{% block page_title %}Exchange Rates Details{% endblock %}
+{% block page_title %}Exchange Rates Records{% endblock %}
 
 {% block add_button_url %}/exchangeRates/add{% endblock %}
 
@@ -65,11 +65,11 @@
 
 {% block pagination %}
     <div class="pagination">
-        <form action="/exchangeRates/previous" method="POST">
-            <button type="submit">Previous Page</button>
+        <form action="/exchangeRates/previous" method="POST" class="left-align">
+            <button type="submit">Previous</button>
         </form>
-        <form action="/exchangeRates/next" method="POST">
-            <button type="submit">Next Page</button>
+        <form action="/exchangeRates/next" method="POST" class="right-align">
+            <button type="submit">Next</button>
         </form>
     </div>
 {% endblock %}

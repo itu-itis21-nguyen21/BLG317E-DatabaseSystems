@@ -97,7 +97,6 @@ button {
     text-align: center;
     font-size: 14px;
     cursor: pointer;
-    margin: 5px 2px;
     border-radius: 50px;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
@@ -146,6 +145,11 @@ button.search:active {
     transform: translateY(2px);
 }
 
+/* Table */
+td {
+    padding: 14px !important;
+}
+
 /* Edit Button */
 button.edit {
     background-color: #5b92e5;
@@ -182,7 +186,7 @@ button.delete:active {
 
 /* Form Styles */
 form {
-    margin: 20px auto;
+    margin: 10px auto;
     padding: 20px;
     background-color: transparent;
     border-radius: 12px;
@@ -300,9 +304,8 @@ a:hover {
     align-items: center;
 }
 
-.pagination .prev-container, .pagination .next-container {
-    display: inline-flex;
-    margin: 0;
+.pagination form {
+    display: block;
 }
 
 /* Pagination Button */
@@ -325,6 +328,7 @@ a:hover {
 .pagination button:active {
     transform: translateY(2px);
 }
+
 
 /* Responsive Styles */
 @media (max-width: 768px) {
@@ -359,4 +363,12 @@ a:hover {
         padding: 6px 12px;
         font-size: 12px;
     }
+}
+
+.left-align {
+    text-align: left;
+}
+
+.right-align {
+    text-align: right;
 }

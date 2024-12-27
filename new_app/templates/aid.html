@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
-{% block title %}Aid Details{% endblock %}
+{% block title %}Financial Aid{% endblock %}
 
-{% block page_title %}Aid Details{% endblock %}
+{% block page_title %}FINANCIAL AID RECORDS{% endblock %}
 
 {% block add_button_url %}/aid/add{% endblock %}
 
@@ -66,12 +66,12 @@
 {% block pagination %}
     <div class="pagination">
         <!-- Previous Button -->
-        <form action="/aid/previous" method="POST">
-            <button type="submit">Previous Page</button>
+        <form action="/aid/previous" method="POST" class="left-align">
+            <button type="submit">Previous</button>
         </form>
         <!-- Next Button -->
-        <form action="/aid/next" method="POST">
-            <button type="submit">Next Page</button>
+        <form action="/aid/next" method="POST" class="right-align">
+            <button type="submit">Next</button>
         </form>
     </div>
 {% endblock %}

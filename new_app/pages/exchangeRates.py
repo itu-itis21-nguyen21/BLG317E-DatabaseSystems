@@ -24,7 +24,7 @@ def get_exchangeRates_details():
         JOIN sources ON exchangeRates.sourceID = sources.sourceID
 
         ORDER BY id ASC
-        LIMIT 20;
+        LIMIT 10;
 
     """
     cursor.execute(sql_string)
@@ -36,6 +36,7 @@ def get_exchangeRates_details():
 @login_required
 def page1():
     exchangeRates_details = get_exchangeRates_details()
+    session["current_page"] = 1
     return render_template('exchangeRates.html', details=exchangeRates_details, is_admin=(current_user.id == "admin"))
 
 @exchangeRates_bp.route('/exchangeRates/add', methods=['GET', 'POST'])
@@ -142,6 +143,7 @@ def delete_record(record_id):
     connection.commit()
     cursor.close()
     
+    session["current_page"] = 1
     return redirect('/exchangeRates')
 
 @exchangeRates_bp.route('/exchangeRates/search', methods=['GET'])
@@ -190,7 +192,7 @@ def search_by_country_and_series():
     cursor.close()
     
     # Render the filtered results
-    return render_template('exchangeRates.html', details=results)
+    return render_template('exchangeRates.html', details=results, is_admin=(current_user.id == "admin"))
 
 
 @exchangeRates_bp.route('/exchangeRates/next', methods=['POST'])
@@ -198,7 +200,7 @@ def next_record():
     cursor = connection.cursor(dictionary=True)
     # Example of incrementing the offset (assuming you store current page in session)
     current_page = session.get('current_page', 1) + 1
-    offset = (current_page - 1) * 20
+    offset = (current_page - 1) * 10
     sql = f"""
         SELECT
             exchangeRates.id AS id,
@@ -214,7 +216,7 @@ def next_record():
         JOIN series ON exchangeRates.seriesID = series.seriesID
         JOIN sources ON exchangeRates.sourceID = sources.sourceID
         ORDER BY id ASC
-        LIMIT 20 OFFSET {offset};
+        LIMIT 10 OFFSET {offset};
     """
     cursor.execute(sql)
     results = cursor.fetchall()
@@ -234,7 +236,7 @@ def previous_record():
     if current_page > 1:
         current_page -= 1
 
-    offset = (current_page - 1) * 20
+    offset = (current_page - 1) * 10
     sql = f"""
         SELECT
             exchangeRates.id AS id,
@@ -250,7 +252,7 @@ def previous_record():
         JOIN series ON exchangeRates.seriesID = series.seriesID
         JOIN sources ON exchangeRates.sourceID = sources.sourceID
         ORDER BY id ASC
-        LIMIT 20 OFFSET {offset};
+        LIMIT 10 OFFSET {offset};
     """
     cursor.execute(sql)
     results = cursor.fetchall()

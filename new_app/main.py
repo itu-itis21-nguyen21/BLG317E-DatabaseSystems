@@ -60,7 +60,6 @@ def login():
         if username in users and users[username]['password'] == password:
             user = User(username)
             login_user(user)
-            flash('Logged in successfully!', 'success')
             return redirect(url_for('main_page'))
         else:
             flash('Invalid username or password', 'danger')
