@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
-{% block title %}CO2 Details{% endblock %}
+{% block title %}CO2 Emissions{% endblock %}
 
-{% block page_title %}CO2 DETAILS{% endblock %}
+{% block page_title %}CO2 EMISSIONS DETAILS{% endblock %}
 
 {% block add_button_url %}/carbondioxide/add{% endblock %}
 
@@ -63,11 +63,11 @@
 
 {% block pagination %}
     <div class="pagination">
-        <form action="/carbondioxide/previous" method="POST">
-            <button type="submit">Previous Page</button>
+        <form action="/carbondioxide/previous" method="POST" class="left-align">
+            <button type="submit">Previous</button>
         </form>
-        <form action="/carbondioxide/next" method="POST">
-            <button type="submit">Next Page</button>
+        <form action="/carbondioxide/next" method="POST" class="right-align">
+            <button type="submit">Next</button>
         </form>
     </div>
 {% endblock %}

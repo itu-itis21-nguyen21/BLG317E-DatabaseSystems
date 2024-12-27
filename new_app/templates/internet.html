@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
-{% block title %}Internet Usage Details{% endblock %}
+{% block title %}Internet Usage{% endblock %}
 
-{% block page_title %}Internet Usage Details{% endblock %}
+{% block page_title %}Internet Usage Records{% endblock %}
 
 {% block add_button_url %}/internet/add{% endblock %}
 
@@ -62,11 +62,11 @@
 
 {% block pagination %}
     <div class="pagination">
-        <form action="/internet/previous" method="POST">
-            <button type="submit">Previous Page</button>
+        <form action="/internet/previous" method="POST" class="left-align">
+            <button type="submit">Previous</button>
         </form>
-        <form action="/internet/next" method="POST">
-            <button type="submit">Next Page</button>
+        <form action="/internet/next" method="POST" class="right-align">
+            <button type="submit">Next</button>
         </form>
     </div>
 {% endblock %}

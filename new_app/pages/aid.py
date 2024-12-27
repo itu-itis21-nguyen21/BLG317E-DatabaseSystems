@@ -20,7 +20,7 @@ def get_aid_details():
         JOIN series ON aid.seriesID = series.seriesID
         JOIN sources ON aid.sourceID = sources.sourceID
         ORDER BY id ASC
-        LIMIT 20;
+        LIMIT 10;
     """
     cursor.execute(sql_string)
     result = cursor.fetchall()
@@ -31,6 +31,7 @@ def get_aid_details():
 @login_required
 def page1():
     aid_details = get_aid_details()
+    session["current_page"] = 1
     return render_template('aid.html', details=aid_details, is_admin=(current_user.id == "admin"))
 
 @aid_bp.route('/aid/add', methods=['GET', 'POST'])
@@ -124,7 +125,7 @@ def edit_record(record_id):
     record = cursor.fetchone()
     cursor.close()
     
-    return render_template('edit.html', record=record)
+    return render_template('edit.html', record=record, is_admin=(current_user.id == "admin"))
 
 @aid_bp.route('/aid/delete/<int:record_id>', methods=['POST'])
 @login_required
@@ -138,6 +139,7 @@ def delete_record(record_id):
     connection.commit()
     cursor.close()
 
+    session["current_page"] = 1
     return redirect('/aid')
 
 @aid_bp.route('/aid/search', methods=['GET'])
@@ -193,7 +195,7 @@ def next_record():
     cursor = connection.cursor(dictionary=True)
     # Example of incrementing the offset (assuming you store current page in session)
     current_page = session.get('current_page', 1) + 1
-    offset = (current_page - 1) * 20
+    offset = (current_page - 1) * 10
     sql = f"""
         SELECT
             aid.id AS id,
@@ -208,7 +210,7 @@ def next_record():
         JOIN series ON aid.seriesID = series.seriesID
         JOIN sources ON aid.sourceID = sources.sourceID
         ORDER BY id ASC
-        LIMIT 20 OFFSET {offset};
+        LIMIT 10 OFFSET {offset};
     """
     cursor.execute(sql)
     results = cursor.fetchall()
@@ -228,7 +230,7 @@ def previous_record():
     if current_page > 1:
         current_page -= 1
 
-    offset = (current_page - 1) * 20
+    offset = (current_page - 1) * 10
     sql = f"""
         SELECT
             aid.id AS id,
@@ -243,7 +245,7 @@ def previous_record():
         JOIN series ON aid.seriesID = series.seriesID
         JOIN sources ON aid.sourceID = sources.sourceID
         ORDER BY id ASC
-        LIMIT 20 OFFSET {offset};
+        LIMIT 10 OFFSET {offset};
     """
     cursor.execute(sql)
     results = cursor.fetchall()
