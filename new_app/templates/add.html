@@ -8,6 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='add.css') }}">
 </head>
 <body>
     <h1>Add Record</h1>
@@ -15,7 +16,7 @@
         <!-- Autocomplete Field for Country Name -->
         <label for="country_name">Country Name:</label>
         <input type="text" id="country_name" name="country_name" placeholder="Start typing a country..." required>
-        
+
         <!-- Other Form Fields -->
 
         <!-- Dropdown for Series -->
@@ -26,13 +27,13 @@
                 <option value="{{ s }}">{{ s }}</option>
             {% endfor %}
         </select>
-        
+
         <label for="value">Value:</label>
         <input type="text" id="value" name="value" required>
-        
+
         <label for="record_year">Record Year:</label>
         <input type="number" id="record_year" name="record_year" min="1900" max="2100" required>
-        
+
         <!-- Dropdown for Source -->
         <label for="source">Source:</label>
         <select id="source" name="source" required>
@@ -41,7 +42,7 @@
                 <option value="{{ src }}">{{ src }}</option>
             {% endfor %}
         </select>
-        
+
         <button type="submit">Add Record</button>
     </form>
     <a href="/">Cancel</a>

@@ -4,7 +4,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    /*height: 100vh;*/
     margin: 0;
     background-image: url('/static/background.jpg');
     background-size: cover;
@@ -12,7 +12,10 @@ body {
 }
 
 h1 {
-    font-size: 4rem;
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 40px;
     color: #2b2ba1;
     margin-bottom: 30px;
     text-transform: uppercase;
@@ -25,7 +28,7 @@ h1 {
     width: 90%;
     max-width: 1200px;
     background-color: rgba(255, 255, 255, 0.9);
-    padding: 40px;
+    padding: 30px;
     border-radius: 15px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
@@ -77,4 +80,14 @@ h1 {
     height: auto;
     object-fit: cover;
     border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .image-container {
+        display: none; /* Hides the image container */
+    }
+
+    .main-box {
+        flex-direction: column; /* Adjusts layout for smaller screens */
+    }
 }
