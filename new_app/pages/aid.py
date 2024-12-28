@@ -140,8 +140,9 @@ def edit_record(record_id):
     cursor.execute(sql, (record_id,))
     record = cursor.fetchone()
     cursor.close()
-    
-    return render_template('edit.html', record=record, is_admin=(current_user.id == "admin"))
+
+    referrer = request.referrer
+    return render_template('edit.html', record=record, is_admin=(current_user.id == "admin"), referrer=referrer)
 
 @aid_bp.route('/aid/delete/<int:record_id>', methods=['POST'])
 @login_required

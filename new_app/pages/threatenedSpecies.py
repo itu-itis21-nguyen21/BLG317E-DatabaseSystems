@@ -145,7 +145,8 @@ def edit_record(record_id):
     record = cursor.fetchone()
     cursor.close()
     
-    return render_template('edit.html', record=record)
+    referrer = request.referrer
+    return render_template('edit.html', record=record, is_admin=(current_user.id == "admin"), referrer=referrer)
 
 @threatenedSpecies_bp.route('/threatenedSpecies/delete/<int:record_id>', methods=['POST'])
 @login_required
