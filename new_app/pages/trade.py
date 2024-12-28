@@ -4,10 +4,9 @@ from database import connection
 
 trade_bp = Blueprint('trade', __name__)
 
-def get_trade_details():
+def get_trade_details(offset=0, limit=10):
     cursor = connection.cursor(dictionary=True)
-    #show: id, countryName, recordYear, Series,series unit, val, source
-    sql_string = """
+    sql_string = f"""
         SELECT
             trade.id AS id,
             countries.country AS country_name,
@@ -21,22 +20,36 @@ def get_trade_details():
         JOIN countries ON trade.countryCode = countries.countryCode
         JOIN series ON trade.seriesID = series.seriesID
         JOIN sources ON trade.sourceID = sources.sourceID
-
+        
         ORDER BY id ASC
-        LIMIT 10;
-
+        LIMIT {limit} OFFSET {offset};
     """
     cursor.execute(sql_string)
     result = cursor.fetchall()
     cursor.close()
     return result
 
-@trade_bp.route('/trade')
+@trade_bp.route('/trade', methods=['GET'])
 @login_required
 def page1():
-    trade_details = get_trade_details()
-    session["current_page"] = 1
-    return render_template('trade.html', details=trade_details, is_admin=(current_user.id == "admin"))
+    # Get the current page from query parameters; default to 1 if not provided
+    current_page = int(request.args.get('page', 1))
+    if current_page < 1:  # Ensure the page number is not less than 1
+        current_page = 1
+
+    # Calculate the offset for the SQL query
+    limit = 10
+    offset = (current_page - 1) * limit
+
+    # Fetch trade details for the current page
+    trade_details = get_trade_details(offset=offset, limit=limit)
+
+    return render_template(
+        'trade.html',
+        details=trade_details,
+        current_page=current_page,
+        is_admin=(current_user.id == "admin")
+    )
 
 @trade_bp.route('/trade/add', methods=['GET', 'POST'])
 @login_required
@@ -220,9 +233,14 @@ def next_record():
     results = cursor.fetchall()
     cursor.close()
     
-    # Update the session page count
+    # Update session and re-render the page
     session['current_page'] = current_page
-    return render_template('trade.html', details=results, is_admin=(current_user.id == "admin"))
+    return render_template(
+        'trade.html',
+        details=results,
+        is_admin=(current_user.id == "admin"),
+        referrer=request.referrer or '/trade'
+    )
 
 
 @trade_bp.route('/trade/previous', methods=['POST'])
@@ -255,6 +273,11 @@ def previous_record():
     results = cursor.fetchall()
     cursor.close()
 
-    # Update the session page count
+    # Update session and re-render the page
     session['current_page'] = current_page
-    return render_template('trade.html', details=results, is_admin=(current_user.id == "admin"))
+    return render_template(
+        'trade.html',
+        details=results,
+        is_admin=(current_user.id == "admin"),
+        referrer=request.referrer or '/trade'
+    )

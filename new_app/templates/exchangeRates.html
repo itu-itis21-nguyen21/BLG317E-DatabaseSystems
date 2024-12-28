@@ -64,12 +64,17 @@
 {% endblock %}
 
 {% block pagination %}
-    <div class="pagination">
-        <form action="/exchangeRates/previous" method="POST" class="left-align">
-            <button type="submit">Previous</button>
-        </form>
-        <form action="/exchangeRates/next" method="POST" class="right-align">
-            <button type="submit">Next</button>
-        </form>
-    </div>
+<div class="pagination">
+    <!-- Previous Button -->
+    <form method="GET" action="/exchangeRates">
+        <input type="hidden" name="page" value="{{ current_page - 1 if current_page > 1 else 1 }}">
+        <button type="submit">Previous Page</button>
+    </form>
+
+    <!-- Next Button -->
+    <form method="GET" action="/exchangeRates">
+        <input type="hidden" name="page" value="{{ current_page + 1 }}">
+        <button type="submit">Next Page</button>
+    </form>
+</div>
 {% endblock %}

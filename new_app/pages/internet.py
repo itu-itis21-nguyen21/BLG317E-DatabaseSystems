@@ -4,7 +4,7 @@ from database import connection
 
 internet_bp = Blueprint('internet', __name__)
 
-def get_internet_details():
+def get_internet_details(offset=0, limit=10):
     cursor = connection.cursor(dictionary=True)
     #show: id, countryName, recordYear, Series,series unit, val, source
     sql_string = """
@@ -22,20 +22,35 @@ def get_internet_details():
         JOIN series ON internet.seriesID = series.seriesID
         JOIN sources ON internet.sourceID = sources.sourceID
         ORDER BY id ASC
-        LIMIT 10;
+        LIMIT %s OFFSET %s;
 
     """
-    cursor.execute(sql_string)
+    cursor.execute(sql_string, (limit, offset))
     result = cursor.fetchall()
     cursor.close()
     return result
 
-@internet_bp.route('/internet')
+@internet_bp.route('/internet', methods=['GET'])
 @login_required
 def page1():
-    internet_details = get_internet_details()
-    session["current_page"] = 1
-    return render_template('internet.html', details=internet_details, is_admin=(current_user.id == "admin"))
+    # Get the current page from query parameters; default to 1 if not provided
+    current_page = int(request.args.get('page', 1))
+    if current_page < 1:  # Ensure the page number is not less than 1
+        current_page = 1
+
+    # Calculate the offset for the SQL query
+    limit = 10
+    offset = (current_page - 1) * limit
+
+    # Fetch internet details for the current page
+    internet_details = get_internet_details(offset=offset, limit=limit)
+
+    return render_template(
+        'internet.html',
+        details=internet_details,
+        current_page=current_page,
+        is_admin=(current_user.id == "admin")
+    )
 
 @internet_bp.route('/internet/add', methods=['GET', 'POST'])
 @login_required
@@ -220,9 +235,14 @@ def next_record():
     results = cursor.fetchall()
     cursor.close()
 
-    # Update the session page count
+    # Update session and re-render the page
     session['current_page'] = current_page
-    return render_template('internet.html', details=results, is_admin=(current_user.id == "admin"))
+    return render_template(
+        'internet.html',
+        details=results,
+        is_admin=(current_user.id == "admin"),
+        referrer=request.referrer or '/internet'
+    )
 
 
 @internet_bp.route('/internet/previous', methods=['POST'])
@@ -256,6 +276,11 @@ def previous_record():
     results = cursor.fetchall()
     cursor.close()
 
-    # Update the session page count
+    # Update session and re-render the page
     session['current_page'] = current_page
-    return render_template('internet.html', details=results, is_admin=(current_user.id == "admin"))
+    return render_template(
+        'internet.html',
+        details=results,
+        is_admin=(current_user.id == "admin"),
+        referrer=request.referrer or '/internet'
+    )

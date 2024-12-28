@@ -4,7 +4,7 @@ from database import connection
 
 aid_bp = Blueprint('aid', __name__)
 
-def get_aid_details():
+def get_aid_details(offset=0, limit=10):
     cursor = connection.cursor(dictionary=True)
     sql_string = """
         SELECT
@@ -20,19 +20,34 @@ def get_aid_details():
         JOIN series ON aid.seriesID = series.seriesID
         JOIN sources ON aid.sourceID = sources.sourceID
         ORDER BY id ASC
-        LIMIT 10;
+        LIMIT %s OFFSET %s;
     """
-    cursor.execute(sql_string)
+    cursor.execute(sql_string, (limit, offset))
     result = cursor.fetchall()
     cursor.close()
     return result
 
-@aid_bp.route('/aid')
+@aid_bp.route('/aid', methods=['GET'])
 @login_required
 def page1():
-    aid_details = get_aid_details()
-    session["current_page"] = 1
-    return render_template('aid.html', details=aid_details, is_admin=(current_user.id == "admin"))
+    # Get the current page from query parameters; default to 1 if not provided
+    current_page = int(request.args.get('page', 1))
+    if current_page < 1:  # Ensure the page number is not less than 1
+        current_page = 1
+
+    # Calculate the offset for the SQL query
+    limit = 10
+    offset = (current_page - 1) * limit
+
+    # Fetch aid details for the current page
+    aid_details = get_aid_details(offset=offset, limit=limit)
+
+    return render_template(
+        'aid.html',
+        details=aid_details,
+        current_page=current_page,
+        is_admin=(current_user.id == "admin")
+    )
 
 @aid_bp.route('/aid/add', methods=['GET', 'POST'])
 @login_required
@@ -217,9 +232,14 @@ def next_record():
     results = cursor.fetchall()
     cursor.close()
     
-    # Update the session page count
+    # Update session and re-render the page
     session['current_page'] = current_page
-    return render_template('aid.html', details=results, is_admin=(current_user.id == "admin"))
+    return render_template(
+        'aid.html',
+        details=results,
+        is_admin=(current_user.id == "admin"),
+        referrer=request.referrer or '/aid'
+    )
 
 
 @aid_bp.route('/aid/previous', methods=['POST'])
@@ -252,6 +272,11 @@ def previous_record():
     results = cursor.fetchall()
     cursor.close()
 
-    # Update the session page count
+    # Update session and re-render the page
     session['current_page'] = current_page
-    return render_template('aid.html', details=results, is_admin=(current_user.id == "admin"))
+    return render_template(
+        'aid.html',
+        details=results,
+        is_admin=(current_user.id == "admin"),
+        referrer=request.referrer or '/aid'
+    )
