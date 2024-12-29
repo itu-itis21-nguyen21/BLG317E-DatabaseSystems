@@ -162,50 +162,54 @@ def delete_record(record_id):
 @aid_bp.route('/aid/search', methods=['GET'])
 @login_required
 def search_by_country_and_series():
-    country_name = request.args.get('country_name', '').strip()
-    series_name = request.args.get('series_name', '').strip()
-    
-    # Build the query dynamically based on provided filters
-    filters = []
-    query = """
-        SELECT
-            aid.id AS id,
-            countries.country AS country_name,
-            series.series AS series,
-            aid.val AS value,
-            series.unit AS unit,
-            aid.recordYear AS record_year,
-            sources.source AS source
-        FROM aid
-        JOIN countries ON aid.countryCode = countries.countryCode
-        JOIN series ON aid.seriesID = series.seriesID
-        JOIN sources ON aid.sourceID = sources.sourceID
-    """
-    
-    if country_name:
-        filters.append("countries.country LIKE %s")
-    if series_name:
-        filters.append("series.series = %s")
-    
-    if filters:
-        query += " WHERE " + " AND ".join(filters)
-    
-    query += " ORDER BY id ASC"
-    
-    # Execute the query with dynamic filters
-    params = []
-    if country_name:
-        params.append(f"%{country_name}%")
-    if series_name:
-        params.append(series_name)
-    
-    cursor = connection.cursor(dictionary=True)
-    cursor.execute(query, tuple(params))
-    results = cursor.fetchall()
-    cursor.close()
-    
-    # Render the filtered results
-    return render_template('aid.html', details=results, is_admin=(current_user.id == "admin"))
+        country_name = request.args.get('country_name', '').strip()
+        series_name = request.args.get('series_name', '').strip()
+
+        # Base query
+        query = """
+            SELECT
+                aid.id AS id,
+                countries.country AS country_name,
+                series.series AS series,
+                aid.val AS value,
+                series.unit AS unit,
+                aid.recordYear AS record_year,
+                sources.source AS source
+            FROM aid
+            JOIN countries ON aid.countryCode = countries.countryCode
+            JOIN series ON aid.seriesID = series.seriesID
+            JOIN sources ON aid.sourceID = sources.sourceID
+        """
+
+        # Apply filters dynamically
+        filters = []
+        params = []
+
+        if country_name:
+            filters.append("countries.country LIKE %s")
+            params.append(f"%{country_name}%")
+        if series_name:
+            filters.append("series.series = %s")
+            params.append(series_name)
+
+        # Append filters to query if present
+        if filters:
+            query += " WHERE " + " AND ".join(filters)
+
+        query += " ORDER BY id ASC"
+
+        # Execute the query
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute(query, tuple(params))
+        results = cursor.fetchall()
+        cursor.close()
+
+        # Define the current page explicitly for rendering
+        current_page = session.get('current_page', 1)
+
+        # Render results
+        return render_template('aid.html', details=results, current_page=current_page, is_admin=(current_user.id == "admin"))
+
 
 @aid_bp.route('/aid/next', methods=['POST'])
 def next_record():

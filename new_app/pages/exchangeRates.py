@@ -183,30 +183,34 @@ def search_by_country_and_series():
         JOIN sources ON exchangeRates.sourceID = sources.sourceID
     """
     
-    if country_name:
-        filters.append("countries.country LIKE %s")
-    if series_name:
-        filters.append("series.series = %s")
-    
-    if filters:
-        query += " WHERE " + " AND ".join(filters)
-    
-    query += " ORDER BY id ASC"
-    
-    # Execute the query with dynamic filters
+    # Apply filters dynamically
+    filters = []
     params = []
+
     if country_name:
-        params.append(f"%{country_name}%")
+            filters.append("countries.country LIKE %s")
+            params.append(f"%{country_name}%")
     if series_name:
-        params.append(series_name)
-    
+            filters.append("series.series = %s")
+            params.append(series_name)
+
+    # Append filters to query if present
+    if filters:
+            query += " WHERE " + " AND ".join(filters)
+
+    query += " ORDER BY id ASC"
+
+    # Execute the query
     cursor = connection.cursor(dictionary=True)
     cursor.execute(query, tuple(params))
     results = cursor.fetchall()
     cursor.close()
+
+    # Define the current page explicitly for rendering
+    current_page = session.get('current_page', 1)
     
     # Render the filtered results
-    return render_template('exchangeRates.html', details=results, is_admin=(current_user.id == "admin"))
+    return render_template('exchangeRates.html', details=results, current_page=current_page, is_admin=(current_user.id == "admin"))
 
 
 @exchangeRates_bp.route('/exchangeRates/next', methods=['POST'])

@@ -182,30 +182,34 @@ def search_by_country_and_series():
         JOIN sources ON trade.sourceID = sources.sourceID
     """
     
-    if country_name:
-        filters.append("countries.country LIKE %s")
-    if series_name:
-        filters.append("series.series = %s")
-    
-    if filters:
-        query += " WHERE " + " AND ".join(filters)
-    
-    query += " ORDER BY id ASC"
-    
-    # Execute the query with dynamic filters
+    # Apply filters dynamically
+    filters = []
     params = []
+
     if country_name:
-        params.append(f"%{country_name}%")
+            filters.append("countries.country LIKE %s")
+            params.append(f"%{country_name}%")
     if series_name:
-        params.append(series_name)
-    
+            filters.append("series.series = %s")
+            params.append(series_name)
+
+    # Append filters to query if present
+    if filters:
+            query += " WHERE " + " AND ".join(filters)
+
+    query += " ORDER BY id ASC"
+
+    # Execute the query
     cursor = connection.cursor(dictionary=True)
     cursor.execute(query, tuple(params))
     results = cursor.fetchall()
     cursor.close()
-    
-    # Render the filtered results
-    return render_template('trade.html', details=results, is_admin=(current_user.id == "admin"))
+
+    # Define the current page explicitly for rendering
+    current_page = session.get('current_page', 1)
+
+    # Render results
+    return render_template('trade.html', details=results, current_page=current_page, is_admin=(current_user.id == "admin"))
 
 
 @trade_bp.route('/trade/next', methods=['POST'])
