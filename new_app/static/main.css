@@ -81,6 +81,15 @@ img {
     text-decoration: underline;
 }
 
+.text-container h2 a {
+    color: #5b92e5;
+    text-decoration: none;
+}
+
+.text-container h2 a:hover {
+    text-decoration: underline;
+}
+
 .image-container {
     flex: 1;
     max-width: 600px;

@@ -9,6 +9,7 @@ from pages.carbondioxide import carbondioxide_bp
 from pages.threatenedSpecies import threatenedSpecies_bp
 from pages.internet import internet_bp
 from pages.health import health_bp
+from pages.charts import charts_bp
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Change this to a strong, secure key!
@@ -45,6 +46,7 @@ app.register_blueprint(carbondioxide_bp)
 app.register_blueprint(threatenedSpecies_bp)
 app.register_blueprint(internet_bp)
 app.register_blueprint(health_bp)
+app.register_blueprint(charts_bp)
 
 @app.route('/')
 @login_required  # Require login to access the main page
