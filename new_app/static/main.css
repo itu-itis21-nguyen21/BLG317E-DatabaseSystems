@@ -9,6 +9,7 @@ body {
     background-image: url('/static/background.jpg');
     background-size: cover;
     background-position: center;
+    padding-top: 2px;
 }
 
 h1 {
@@ -40,11 +41,12 @@ img {
     width: 90%;
     max-width: 1200px;
     background-color: rgba(255, 255, 255, 0.9);
-    padding: 30px;
+    padding: 10px;
     border-radius: 15px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
-    margin-top: 50px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 .text-container {
@@ -84,6 +86,7 @@ img {
 .text-container h2 a {
     color: #5b92e5;
     text-decoration: none;
+    font-size: 1.5rem;
 }
 
 .text-container h2 a:hover {
